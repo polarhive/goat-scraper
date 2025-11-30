@@ -7,3 +7,5 @@
 *.pptx
 .vercel
 *.ppt
+*.pyc
+*.docx
