@@ -23,9 +23,13 @@ import {
   Gamepad2,
   X as XIcon,
 } from "lucide-react";
+import { Progress } from "@/components/ui/progress";
+import { useProgress } from "@/components/progress-provider";
+import { useMemo } from "react";
 
 export default function StudyPage() {
   const { items, removeItem, clearCart } = useStudyCart();
+  const { isFileComplete, isUnitComplete } = useProgress();
   const [activeIndex, setActiveIndex] = useState(0);
   const [scale, setScale] = useState(100);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -99,50 +103,87 @@ export default function StudyPage() {
 
         {/* PDF List */}
         <ScrollArea className="flex-1">
-          <div className="p-2 space-y-1">
-            {items.map((item, index) => (
-              <div
-                key={item.id}
-                className={`flex items-center gap-2 p-3 rounded-lg cursor-pointer group transition-colors ${
-                  index === activeIndex
-                    ? "bg-indigo-50 dark:bg-indigo-950/50 border border-indigo-200 dark:border-indigo-800"
-                    : "hover:bg-slate-100 dark:hover:bg-slate-800"
-                }`}
-                onClick={() => setActiveIndex(index)}
-              >
-                <div className="relative shrink-0">
-                  <FileText className="h-5 w-5 text-red-500" />
-                  <Badge
-                    className="absolute -top-2 -left-2 h-4 w-4 p-0 flex items-center justify-center text-[10px]"
-                    variant={index === activeIndex ? "default" : "secondary"}
-                  >
-                    {index + 1}
-                  </Badge>
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium truncate text-slate-900 dark:text-white">
-                    {item.title}
-                  </p>
-                  <p className="text-xs text-slate-500 truncate">
-                    Unit {item.unitNumber}
-                  </p>
-                </div>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity shrink-0"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    removeItem(item.id);
-                    if (index <= activeIndex && activeIndex > 0) {
-                      setActiveIndex(activeIndex - 1);
-                    }
-                  }}
-                >
-                  <X className="h-3 w-3" />
-                </Button>
-              </div>
-            ))}
+          <div className="p-2 space-y-2">
+            {useMemo(() => {
+              // group items by unit
+              const groups: Record<number, typeof items> = {} as any;
+              items.forEach((it) => {
+                groups[it.unitNumber] = groups[it.unitNumber] || [];
+                groups[it.unitNumber].push(it);
+              });
+              const sortedUnits = Object.keys(groups)
+                .map((k) => Number(k))
+                .sort((a, b) => a - b);
+
+              let globalIndex = 0;
+              return (
+                <>
+                  {sortedUnits.map((unitNum) => {
+                    const group = groups[unitNum];
+                    const unitComplete = group[0]?.courseId ? isUnitComplete(group[0].courseId!, unitNum) : false;
+                    return (
+                      <div key={`unit-${unitNum}`}>
+                        <div className="px-2 py-1 text-xs text-slate-400 flex items-center justify-between">
+                          <span>Unit {unitNum}</span>
+                          {unitComplete && <Badge variant="secondary">Unit Complete</Badge>}
+                        </div>
+                        <div className="space-y-1">
+                          {group.map((item) => {
+                            const index = globalIndex++;
+                            const isActive = index === activeIndex;
+                            const isComplete =
+                              item.courseId && item.fileKey
+                                ? isFileComplete(item.courseId, item.fileKey)
+                                : false;
+                            return (
+                              <div
+                                key={item.id}
+                                className={`flex items-center gap-2 p-3 rounded-lg cursor-pointer group transition-colors min-w-0 ${
+                                  isActive
+                                    ? "bg-indigo-50 dark:bg-indigo-950/50 border border-indigo-200 dark:border-indigo-800"
+                                    : "hover:bg-slate-100 dark:hover:bg-slate-800"
+                                }`}
+                                onClick={() => setActiveIndex(index)}
+                              >
+                                <div className="relative shrink-0">
+                                  <FileText className="h-5 w-5 text-red-500" />
+                                  <Badge
+                                    className="absolute -top-2 -left-2 h-4 w-4 p-0 flex items-center justify-center text-[10px]"
+                                    variant={isActive ? "default" : "secondary"}
+                                  >
+                                    {index + 1}
+                                  </Badge>
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <p className={`text-sm font-medium truncate ${isComplete ? 'text-green-400' : ''}`}>
+                                    {item.title}
+                                  </p>
+                                  <p className="text-xs text-slate-500 truncate">Unit {item.unitNumber}</p>
+                                </div>
+                                <Button
+                                  variant="ghost"
+                                  size="icon"
+                                  className="h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity shrink-0"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    removeItem(item.id);
+                                    if (index <= activeIndex && activeIndex > 0) {
+                                      setActiveIndex(activeIndex - 1);
+                                    }
+                                  }}
+                                >
+                                  <X className="h-3 w-3" />
+                                </Button>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </>
+              );
+            }, [items, activeIndex, removeItem, isFileComplete, isUnitComplete])}
           </div>
         </ScrollArea>
       </div>
@@ -230,6 +271,15 @@ export default function StudyPage() {
               </>
             )}
           </div>
+        </div>
+
+        {/* Queue progress */}
+        <div className="px-4 pt-2 pb-3 border-b border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-xs text-slate-500">Queue Progress</span>
+            <span className="text-xs text-slate-500">{activeIndex + 1}/{items.length}</span>
+          </div>
+          <Progress value={Math.round(((activeIndex + 1) / Math.max(1, items.length)) * 100)} className="h-2" />
         </div>
 
         {/* PDF Viewer */}

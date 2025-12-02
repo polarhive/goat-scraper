@@ -81123,5 +81123,35 @@
     "id": "21524",
     "subjectCode": "UX24MB761A",
     "subjectName": "UX24MB761A-Capstone Project -1"
+  },
+  {
+    "id": "21525",
+    "subjectCode": "UH24PT101",
+    "subjectName": "UH24PT101-Anatomy"
+  },
+  {
+    "id": "21526",
+    "subjectCode": "UH24PT102",
+    "subjectName": "UH24PT102-Physiology"
+  },
+  {
+    "id": "21527",
+    "subjectCode": "UP24MP741A",
+    "subjectName": "UP24MP741A-Research Methodology &  Biostatistics"
+  },
+  {
+    "id": "21528",
+    "subjectCode": "UP24MP711A",
+    "subjectName": "UP24MP711A-Journal Club"
+  },
+  {
+    "id": "21529",
+    "subjectCode": "UP24MP7E1A",
+    "subjectName": "UP24MP7E1A-Research Work"
+  },
+  {
+    "id": "21530",
+    "subjectCode": "UP24MP721A",
+    "subjectName": "UP24MP721A-Discussion / Presentation (Proposal Presentation)"
   }
 ]

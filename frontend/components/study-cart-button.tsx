@@ -65,9 +65,10 @@ export function StudyCartButton() {
               <div className="space-y-1 p-1">
                 {items.map((item) => (
                   <div
-                    key={item.id}
-                    className="flex items-center gap-2 p-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 group"
-                  >
+                      key={item.id}
+                      className="flex items-center gap-2 p-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 group min-w-0"
+                      style={{ overflow: 'hidden' }}
+                    >
                     <FileText className="h-4 w-4 text-red-500 shrink-0" />
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium truncate">{item.title}</p>

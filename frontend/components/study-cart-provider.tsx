@@ -8,6 +8,9 @@ export interface StudyItem {
   title: string;
   courseName: string;
   unitNumber: number;
+  // optional linkage to progress tracking
+  courseId?: string;
+  fileKey?: string; // e.g. "1-c8988bc7-..."
 }
 
 interface StudyCartContextType {

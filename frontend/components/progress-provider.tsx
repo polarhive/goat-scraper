@@ -18,6 +18,7 @@ interface ProgressContextType {
     total: number;
     percentage: number;
   };
+  isUnitComplete: (courseId: string, unitNumber: number) => boolean;
   getCourseProgress: (courseId: string, totalFiles: number, allFileKeys: string[]) => {
     completed: number;
     total: number;
@@ -89,6 +90,13 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     });
   };
 
+  const isUnitComplete = (courseId: string, unitNumber: number): boolean => {
+    const courseProgress = progress[courseId] || {};
+    const keys = Object.keys(courseProgress).filter((k) => k.startsWith(`${unitNumber}-`));
+    if (keys.length === 0) return false;
+    return keys.every((k) => courseProgress[k]);
+  };
+
   const getUnitProgress = (
     courseId: string,
     unitNumber: number,
@@ -126,6 +134,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
         isFileComplete,
         toggleUnitComplete,
         getUnitProgress,
+        isUnitComplete,
         getCourseProgress,
       }}
     >

@@ -9,3 +9,4 @@
 *.pyc
 *.docx
 frontend/public/courses/
+.env.local

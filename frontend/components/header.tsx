@@ -37,9 +37,13 @@ export function Header({ searchItems = [] }: HeaderProps) {
             </Link>
           </div>
           <div className="flex items-center gap-2">
-            <CommandPalette items={searchItems} />
-            <StudyCartButton />
-            <ThemeToggle />
+            <div className="flex items-center gap-2">
+              <CommandPalette items={searchItems} />
+              <StudyCartButton />
+            </div>
+            <div className="ml-4">
+              <ThemeToggle />
+            </div>
           </div>
         </div>
       </div>
