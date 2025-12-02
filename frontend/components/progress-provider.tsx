@@ -70,8 +70,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       const courseProgress = prev[courseId] || {};
       const isComplete = !courseProgress[fileKey];
       
-      // Send update to WebSocket server
-      sendProgressToServer(courseId, fileKey, isComplete);
+      // No longer sending individual updates - bulk sync will handle it
       
       return {
         ...prev,
@@ -93,8 +92,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       const updatedProgress = { ...courseProgress };
       fileKeys.forEach((key) => {
         updatedProgress[key] = markComplete;
-        // Send each update to WebSocket server
-        sendProgressToServer(courseId, key, markComplete);
+        // No longer sending individual updates - bulk sync will handle it
       });
       return {
         ...prev,

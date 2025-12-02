@@ -45,7 +45,8 @@ export default function StudyPage() {
   const currentCourseId = items[activeIndex]?.courseId || "global";
   
   // WebSocket sync and leaderboard - must be called before any early returns
-  const { leaderboard, username, isConnected, requestLeaderboardUpdate, syncStudyItems } = useProgressSync(currentCourseId);
+  // Full progress sync happens automatically on connect, reconnect, and periodically
+  const { leaderboard, username, isConnected, requestLeaderboardUpdate } = useProgressSync(currentCourseId);
   
   // Get current user ID
   useEffect(() => {
@@ -54,20 +55,6 @@ export default function StudyPage() {
       setCurrentUserId(userId);
     }
   }, []);
-
-  // Sync study cart items to server whenever items or courseId changes
-  useEffect(() => {
-    if (isConnected && currentCourseId && currentCourseId !== "global") {
-      // Get all fileKeys for the current course from study cart
-      const fileKeysForCourse = items
-        .filter(item => item.courseId === currentCourseId && item.fileKey)
-        .map(item => item.fileKey!);
-      
-      if (fileKeysForCourse.length > 0) {
-        syncStudyItems(fileKeysForCourse);
-      }
-    }
-  }, [items, currentCourseId, isConnected, syncStudyItems]);
 
   const activeItem = items[activeIndex];
 

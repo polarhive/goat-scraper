@@ -25,6 +25,7 @@ interface UseProgressSyncReturn {
   updateUsername: (newUsername: string) => void;
   requestLeaderboardUpdate: () => void;
   syncStudyItems: (fileKeys: string[]) => void;
+  syncFullProgress: (progress: any, studyItems: any) => void;
 }
 
 // Generate a random anonymous username
@@ -120,17 +121,43 @@ export function useProgressSync(courseId: string): UseProgressSyncReturn {
         console.log("Connected to progress tracking server");
         setIsConnected(true);
         
-        // Send any pending updates
-        if (pendingUpdatesRef.current.length > 0) {
-          pendingUpdatesRef.current.forEach((update) => {
+        // Sync full progress state from localStorage (client is source of truth)
+        try {
+          const storedProgress = localStorage.getItem("course-progress");
+          const storedCart = localStorage.getItem("study-cart");
+          
+          if (storedProgress) {
+            const progress = JSON.parse(storedProgress);
+            
+            // Build studyItems map from cart
+            const studyItems: Record<string, string[]> = {};
+            if (storedCart) {
+              const cartItems = JSON.parse(storedCart);
+              cartItems.forEach((item: any) => {
+                if (item.courseId && item.fileKey) {
+                  if (!studyItems[item.courseId]) {
+                    studyItems[item.courseId] = [];
+                  }
+                  studyItems[item.courseId].push(item.fileKey);
+                }
+              });
+            }
+            
+            // Send bulk sync
             ws.send(JSON.stringify({
-              type: "progress_update",
-              ...update,
+              type: "sync_full_progress",
+              progress,
+              studyItems,
               username,
             }));
-          });
-          pendingUpdatesRef.current = [];
+            console.log("Synced full progress state to server");
+          }
+        } catch (error) {
+          console.error("Failed to sync progress:", error);
         }
+        
+        // Clear any pending individual updates (no longer needed)
+        pendingUpdatesRef.current = [];
         
         // Request initial leaderboard
         ws.send(JSON.stringify({
@@ -207,6 +234,125 @@ export function useProgressSync(courseId: string): UseProgressSyncReturn {
     return () => clearInterval(pollInterval);
   }, [isConnected, courseId]);
 
+  // Periodic full sync every 30 seconds when connected
+  useEffect(() => {
+    if (!isConnected) return;
+
+    const syncInterval = setInterval(() => {
+      if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
+        try {
+          const storedProgress = localStorage.getItem("course-progress");
+          const storedCart = localStorage.getItem("study-cart");
+          
+          if (storedProgress) {
+            const progress = JSON.parse(storedProgress);
+            
+            // Build studyItems map from cart
+            const studyItems: Record<string, string[]> = {};
+            if (storedCart) {
+              const cartItems = JSON.parse(storedCart);
+              cartItems.forEach((item: any) => {
+                if (item.courseId && item.fileKey) {
+                  if (!studyItems[item.courseId]) {
+                    studyItems[item.courseId] = [];
+                  }
+                  studyItems[item.courseId].push(item.fileKey);
+                }
+              });
+            }
+            
+            wsRef.current!.send(JSON.stringify({
+              type: "sync_full_progress",
+              progress,
+              studyItems,
+              username,
+            }));
+            console.log("Periodic sync completed");
+          }
+        } catch (error) {
+          console.error("Failed to sync progress:", error);
+        }
+      }
+    }, 30000); // Every 30 seconds
+
+    return () => clearInterval(syncInterval);
+  }, [isConnected, username]);
+
+  // Handle online/offline events
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const handleOnline = () => {
+      console.log("Browser came online, reconnecting...");
+      if (!isConnected) {
+        connect();
+      }
+    };
+
+    const handleOffline = () => {
+      console.log("Browser went offline");
+    };
+
+    window.addEventListener("online", handleOnline);
+    window.addEventListener("offline", handleOffline);
+
+    return () => {
+      window.removeEventListener("online", handleOnline);
+      window.removeEventListener("offline", handleOffline);
+    };
+  }, [isConnected, connect]);
+
+  // Listen for localStorage changes and trigger sync
+  useEffect(() => {
+    if (typeof window === "undefined" || !isConnected) return;
+
+    const handleStorageChange = (e: StorageEvent) => {
+      // Only sync if course-progress or study-cart changed
+      if (e.key === "course-progress" || e.key === "study-cart") {
+        // Debounce to avoid too many syncs
+        if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
+          try {
+            const storedProgress = localStorage.getItem("course-progress");
+            const storedCart = localStorage.getItem("study-cart");
+            
+            if (storedProgress) {
+              const progress = JSON.parse(storedProgress);
+              
+              const studyItems: Record<string, string[]> = {};
+              if (storedCart) {
+                const cartItems = JSON.parse(storedCart);
+                cartItems.forEach((item: any) => {
+                  if (item.courseId && item.fileKey) {
+                    if (!studyItems[item.courseId]) {
+                      studyItems[item.courseId] = [];
+                    }
+                    studyItems[item.courseId].push(item.fileKey);
+                  }
+                });
+              }
+              
+              wsRef.current.send(JSON.stringify({
+                type: "sync_full_progress",
+                progress,
+                studyItems,
+                username,
+              }));
+              console.log("Synced after localStorage change");
+            }
+          } catch (error) {
+            console.error("Failed to sync after storage change:", error);
+          }
+        }
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, [isConnected, username]);
+
   // Send progress update to server
   const sendProgressUpdate = useCallback((fileKey: string, isComplete: boolean) => {
     const update: ProgressUpdate = {
@@ -255,6 +401,18 @@ export function useProgressSync(courseId: string): UseProgressSyncReturn {
     }
   }, [courseId]);
 
+  // Sync full progress state from localStorage to server (client is source of truth)
+  const syncFullProgress = useCallback((progress: any, studyItems: any) => {
+    if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
+      wsRef.current.send(JSON.stringify({
+        type: "sync_full_progress",
+        progress,
+        studyItems,
+        username,
+      }));
+    }
+  }, [username]);
+
   // Calculate current user's rank
   const currentUserRank = userId 
     ? leaderboard.findIndex(entry => entry.userId === userId) + 1 
@@ -268,5 +426,6 @@ export function useProgressSync(courseId: string): UseProgressSyncReturn {
     updateUsername,
     requestLeaderboardUpdate,
     syncStudyItems,
+    syncFullProgress,
   };
 }

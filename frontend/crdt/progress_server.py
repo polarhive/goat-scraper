@@ -5,7 +5,7 @@ Tracks anonymous users' progress across different courses and units
 
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
-from typing import Dict
+from typing import Dict, Optional
 from datetime import datetime
 
 app = FastAPI()
@@ -121,6 +121,59 @@ async def get_leaderboard(course_id: str):
     }
 
 
+@app.post("/clear")
+async def clear_progress(user_id: Optional[str] = None):
+    """Clear progress data.
+
+    - If `user_id` is provided (query param), remove that user's progress and close their connection if present.
+    - If no `user_id` is provided, clear all stored progress and disconnect all active websockets.
+    Returns a JSON object with the scope and number of removed entries.
+    """
+    removed = 0
+    # Clear a single user
+    if user_id:
+        if user_id in user_progress:
+            del user_progress[user_id]
+            removed = 1
+
+        # Close and remove connection if present
+        try:
+            if user_id in manager.active_connections:
+                try:
+                    await manager.active_connections[user_id].close()
+                except Exception:
+                    pass
+                manager.disconnect(user_id)
+        except Exception:
+            pass
+
+        # Notify remaining clients that a user's data was cleared
+        msg = {"type": "progress_cleared", "scope": "user", "userId": user_id, "removed": removed}
+        for uid, ws in list(manager.active_connections.items()):
+            try:
+                await ws.send_json(msg)
+            except Exception:
+                manager.disconnect(uid)
+
+        return {"status": "cleared_user", "userId": user_id, "removed": removed}
+
+    # Clear all users
+    else:
+        removed = len(user_progress)
+        user_progress.clear()
+
+        # Close all active websocket connections
+        for uid, ws in list(manager.active_connections.items()):
+            try:
+                await ws.close()
+            except Exception:
+                pass
+            manager.disconnect(uid)
+
+        # Notify (if any) - since we've disconnected everyone, this is best-effort
+        return {"status": "cleared_all", "removed": removed}
+
+
 @app.websocket("/ws/{user_id}")
 async def websocket_endpoint(websocket: WebSocket, user_id: str):
     await manager.connect(user_id, websocket)
@@ -202,6 +255,31 @@ async def websocket_endpoint(websocket: WebSocket, user_id: str):
                     "type": "study_items_synced",
                     "courseId": course_id,
                     "count": len(file_keys)
+                })
+            
+            elif data["type"] == "sync_full_progress":
+                # Bulk sync entire progress state from client's localStorage
+                full_progress = data["progress"]  # {courseId: {fileKey: bool}}
+                username = data.get("username", "Anonymous")
+                study_items = data.get("studyItems", {})
+                
+                if user_id not in user_progress:
+                    user_progress[user_id] = {"progress": {}, "username": username, "study_items": {}}
+                
+                # Merge/replace progress data from client (client is source of truth)
+                user_progress[user_id]["progress"] = full_progress
+                user_progress[user_id]["username"] = username
+                user_progress[user_id]["study_items"] = study_items
+                user_progress[user_id]["lastUpdate"] = datetime.now().isoformat()
+                
+                # Broadcast updated leaderboards for all affected courses
+                affected_courses = set(full_progress.keys()) | set(study_items.keys())
+                for course_id in affected_courses:
+                    await manager.broadcast_leaderboard(course_id)
+                
+                await websocket.send_json({
+                    "type": "full_progress_synced",
+                    "coursesCount": len(affected_courses)
                 })
     
     except WebSocketDisconnect:
