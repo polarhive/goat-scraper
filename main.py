@@ -21,6 +21,8 @@ import tempfile
 from typing import Optional, Dict, List, Any, Tuple
 import re
 import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 from bs4 import BeautifulSoup
 from pathlib import Path
 import hashlib
@@ -60,13 +62,22 @@ def setup_logger(
             "CRITICAL": Fore.RED + Style.BRIGHT,
         }
 
+        ICONS = {
+            "DEBUG": "·",
+            "INFO": "✓",
+            "WARNING": "?",
+            "ERROR": "✗",
+            "CRITICAL": "✗",
+        }
+
         def format(self, record):
             # Make a copy to avoid modifying the original record
             log_record = logging.makeLogRecord(record.__dict__)
             levelname = log_record.levelname
             if levelname in self.COLORS:
+                icon = self.ICONS.get(levelname, levelname)
                 log_record.levelname = (
-                    f"{self.COLORS[levelname]}{levelname}{Style.RESET_ALL}"
+                    f"{self.COLORS[levelname]}{icon}{Style.RESET_ALL}"
                 )
             return super().format(log_record)
 
@@ -373,8 +384,8 @@ def convert_to_pdf(input_path: Path) -> Optional[Path]:
                 "source file could not be loaded" in stderr_lower
                 or "file format error" in stderr_lower
             ):
-                logger.warning(
-                    "LibreOffice failed to load file, attempting zip repair..."
+                print(
+                    f"    {Fore.YELLOW}?{Style.RESET_ALL} LibreOffice failed to load file, attempting zip repair..."
                 )
 
                 # Try to repair the file using zip -FF
@@ -384,7 +395,9 @@ def convert_to_pdf(input_path: Path) -> Optional[Path]:
                 try:
                     zip_exe = shutil.which("zip")
                     if not zip_exe:
-                        logger.warning("zip tool not found; cannot attempt zip repair")
+                        print(
+                            f"    {Fore.YELLOW}?{Style.RESET_ALL} zip tool not found; cannot attempt zip repair"
+                        )
                         continue
                     repair_result = subprocess.run(
                         [
@@ -469,9 +482,13 @@ def convert_to_pdf(input_path: Path) -> Optional[Path]:
                                         pass
                                 return output_path
                         else:
-                            logger.warning("Failed to convert repaired file")
+                            print(
+                                f"    {Fore.YELLOW}?{Style.RESET_ALL} Failed to convert repaired file"
+                            )
                     else:
-                        logger.warning("Zip repair failed or produced empty file")
+                        print(
+                            f"    {Fore.YELLOW}?{Style.RESET_ALL} Zip repair failed or produced empty file"
+                        )
                 except (subprocess.TimeoutExpired, FileNotFoundError) as e:
                     logger.debug(f"Zip repair failed: {e}")
                     # Clean up if repair file was created
@@ -544,8 +561,8 @@ def convert_to_pdf(input_path: Path) -> Optional[Path]:
     # Method 3: For PPTX, try python-pptx + reportlab (limited - only extracts text/images)
     # This is a fallback that won't preserve full formatting
 
-    logger.warning(
-        f"Could not convert {input_path.name} to PDF. Keeping original format."
+    print(
+        f"    {Fore.YELLOW}?{Style.RESET_ALL} Could not convert {input_path.name} to PDF. Keeping original format."
     )
 
     if libreoffice_tried:
@@ -584,6 +601,37 @@ class PESUPDFFetcher:
 
     def __init__(self, username: str, password: str) -> None:
         self.session = requests.Session()
+
+        # Configure retry strategy with exponential backoff
+        retry_strategy = Retry(
+            total=3,  # Maximum number of retries
+            backoff_factor=1,  # Wait 1s, 2s, 4s between retries
+            status_forcelist=[
+                429,
+                500,
+                502,
+                503,
+                504,
+            ],  # Retry on these HTTP status codes
+            allowed_methods=["HEAD", "GET", "OPTIONS", "POST"],  # Methods to retry
+        )
+
+        # Configure connection pooling for better performance
+        adapter = HTTPAdapter(
+            max_retries=retry_strategy,
+            pool_connections=20,  # Number of connection pools to cache
+            pool_maxsize=20,  # Maximum number of connections to save in the pool
+        )
+
+        # Mount adapter for both HTTP and HTTPS
+        self.session.mount("http://", adapter)
+        self.session.mount("https://", adapter)
+
+        # Enable compression for faster data transfer
+        self.session.headers.update(
+            {"Accept-Encoding": "gzip, deflate", "Connection": "keep-alive"}
+        )
+
         self.username = username
         self.password = password
         # Track whether we have a valid authenticated session (cookie-based or validated)
@@ -807,7 +855,7 @@ class PESUPDFFetcher:
         """Logout from PESU Academy."""
         try:
             logout_url = f"{self.BASE_URL}/logout"
-            self.session.get(logout_url)
+            self.session.get(logout_url, timeout=10)
             # Clear authenticated state
             self._authenticated = False
             logger.debug("✓ Session terminated")
@@ -832,7 +880,7 @@ class PESUPDFFetcher:
 
         try:
             url = f"{self.BASE_URL}/a/g/getSubjectsCode"
-            response = self.session.get(url)
+            response = self.session.get(url, timeout=30)
             response.raise_for_status()
 
             # Parse HTML options
@@ -875,13 +923,11 @@ class PESUPDFFetcher:
                 return None
 
         except requests.RequestException as e:
-            logger.error(
-                f"FAILURE [get_subjects_code]: Network error fetching subjects - {e}"
-            )
+            logger.error(f"Network error fetching subjects: {e}")
             logger.error(f"URL: {url}")
             return None
         except Exception as e:
-            logger.error(f"FAILURE [get_subjects_code]: Error parsing subjects - {e}")
+            logger.error(f"Error parsing subjects: {e}")
             logger.error(f"URL: {url}")
             return None
 
@@ -899,7 +945,7 @@ class PESUPDFFetcher:
 
         try:
             url = f"{self.BASE_URL}/a/i/getCourse/{course_id}"
-            response = self.session.get(url)
+            response = self.session.get(url, timeout=30)
             response.raise_for_status()
 
             # The response is JSON-encoded HTML string
@@ -945,14 +991,12 @@ class PESUPDFFetcher:
                 return None
 
         except requests.RequestException as e:
-            logger.error(
-                f"FAILURE [get_course_units]: Network error fetching course units - {e}"
-            )
+            logger.error(f"Network error fetching course units: {e}")
             logger.error(f"Course ID: {course_id}")
             logger.error(f"URL: {url}")
             return None
         except Exception as e:
-            logger.error(f"FAILURE [get_course_units]: Error parsing units - {e}")
+            logger.error(f"Failed to parse course units: {e}")
             logger.error(f"Course ID: {course_id}")
             logger.error(f"URL: {url}")
             return None
@@ -971,7 +1015,7 @@ class PESUPDFFetcher:
 
         try:
             url = f"{self.BASE_URL}/a/i/getCourseClasses/{unit_id}"
-            response = self.session.get(url)
+            response = self.session.get(url, timeout=30)
             response.raise_for_status()
 
             # The response is JSON-encoded HTML string
@@ -1014,14 +1058,12 @@ class PESUPDFFetcher:
                 return None
 
         except requests.RequestException as e:
-            logger.error(
-                f"FAILURE [get_unit_classes]: Network error fetching unit classes - {e}"
-            )
+            logger.error(f"Network error fetching unit classes: {e}")
             logger.error(f"Unit ID: {unit_id}")
             logger.error(f"URL: {url}")
             return None
         except Exception as e:
-            logger.error(f"FAILURE [get_unit_classes]: Error parsing classes - {e}")
+            logger.error(f"Failed to parse unit classes: {e}")
             logger.error(f"Unit ID: {unit_id}")
             logger.error(f"URL: {url}")
             return None
@@ -1037,12 +1079,15 @@ class PESUPDFFetcher:
         output_path: Optional[Path] = None,
         class_name: Optional[str] = None,
         existing_summary: Optional[Dict] = None,
+        content_type_id: str = "2",
     ) -> List[Dict]:
         """
         Step 4: Download file(s) for a specific class (PDF, PPTX, DOCX, etc.).
         Returns a list of successfully downloaded file paths.
         If multiple files are found, all are downloaded with meaningful names based on link text.
         Endpoint: /Academy/s/studentProfilePESUAdmin with specific parameters
+
+        content_type_id: "2" for Slides, "3" for Notes
         """
         logger.debug(f"\n=== STEP 4: Downloading File ===")
         logger.debug(f"Course ID: {course_id}, Class ID: {class_id}")
@@ -1054,11 +1099,11 @@ class PESUPDFFetcher:
                 "controllerMode": "6403",
                 "actionType": "60",
                 "selectedData": course_id,
-                "id": "2",
+                "id": content_type_id,
                 "unitid": class_id,
             }
 
-            response = self.session.get(url, params=params)
+            response = self.session.get(url, params=params, timeout=60)
             response.raise_for_status()
 
             # Check if response is actually a PDF or HTML
@@ -1076,7 +1121,7 @@ class PESUPDFFetcher:
 
                 # Check if file is empty (0 bytes) and skip it
                 if file_size == 0:
-                    logger.warning(f"⚠ Downloaded PDF is empty (0 bytes), skipping")
+                    logger.warning("Downloaded PDF is empty (0 bytes), skipping")
                     output_path.unlink()  # Delete the 0-byte file
                     return []
 
@@ -1232,7 +1277,10 @@ class PESUPDFFetcher:
                             "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
                         }
                         file_response = self.session.get(
-                            selected_link["full_url"], stream=True, headers=headers
+                            selected_link["full_url"],
+                            stream=True,
+                            headers=headers,
+                            timeout=60,
                         )
                         file_response.raise_for_status()
                     except requests.RequestException as e:
@@ -1449,11 +1497,11 @@ class PESUPDFFetcher:
 
                         # Check if file is empty (0 bytes) and skip it
                         if file_size == 0:
-                            logger.warning(
-                                f"⚠ Skipping empty file (0 bytes): {current_output_path.name}"
+                            logger.debug(
+                                f"Skipping empty file (0 bytes): {current_output_path.name}"
                             )
-                            logger.warning(f"Link text: {selected_link['text']}")
-                            logger.warning(f"URL: {selected_link['full_url']}")
+                            logger.debug(f"Link text: {selected_link['text']}")
+                            logger.debug(f"URL: {selected_link['full_url']}")
                             current_output_path.unlink()  # Delete the 0-byte file
                             continue
 
@@ -1506,21 +1554,19 @@ class PESUPDFFetcher:
                 return []
 
         except requests.RequestException as e:
-            logger.error(
-                f"FAILURE [download_pdf]: Network error downloading file - {e}"
-            )
+            logger.error(f"Network error downloading file: {e}")
             logger.error(f"Course ID: {course_id}")
             logger.error(f"Class ID: {class_id}")
             logger.error(f"Output Path: {output_path}")
             return []
         except IOError as e:
-            logger.error(f"FAILURE [download_pdf]: File I/O error - {e}")
+            logger.error(f"File I/O error during download: {e}")
             logger.error(f"Course ID: {course_id}")
             logger.error(f"Class ID: {class_id}")
             logger.error(f"Output Path: {output_path}")
             return []
         except Exception as e:
-            logger.error(f"FAILURE [download_pdf]: Unexpected error - {e}")
+            logger.error(f"Unexpected error during download: {e}")
             logger.error(f"Course ID: {course_id}")
             logger.error(f"Class ID: {class_id}")
             logger.error(f"Output Path: {output_path}")
@@ -1679,13 +1725,15 @@ def merge_pdfs(pdf_files: List[Path], output_path: Path) -> bool:
         return True
 
     except Exception as e:
-        logger.error(f"FAILURE [merge_pdfs]: Failed to merge PDFs - {e}")
+        logger.error(f"Failed to merge PDFs: {e}")
         logger.error(f"Output Path: {output_path}")
         logger.error(f"Number of files: {len(pdf_files)}")
         return False
 
 
-def generate_esa_pdf(course_dir: Path, course_prefix: str) -> bool:
+def generate_esa_pdf(
+    course_dir: Path, course_prefix: str, content_suffix: str = ""
+) -> bool:
     """Generate ESA PDF by combining all 4 unit merged PDFs."""
     try:
         # Find all unit merged PDFs
@@ -1698,7 +1746,9 @@ def generate_esa_pdf(course_dir: Path, course_prefix: str) -> bool:
 
             # Look for merged PDF in this unit directory
             unit_dir = unit_dirs[0]
-            merged_pdf_pattern = f"{course_prefix}_u{unit_num}_merged.pdf"
+            merged_pdf_pattern = (
+                f"{course_prefix}_u{unit_num}{content_suffix}_merged.pdf"
+            )
             merged_pdf_files = list(unit_dir.glob(merged_pdf_pattern))
 
             if merged_pdf_files:
@@ -1714,7 +1764,7 @@ def generate_esa_pdf(course_dir: Path, course_prefix: str) -> bool:
         merged_pdfs.sort(key=lambda x: x[0])
 
         # Create ESA PDF
-        esa_pdf_path = course_dir / f"{course_prefix}_ESA.pdf"
+        esa_pdf_path = course_dir / f"{course_prefix}{content_suffix}_ESA.pdf"
 
         # Compute combined SHA of unit merged PDFs and skip if ESA is up-to-date
         combined = compute_combined_sha([pdf for _, pdf in merged_pdfs])
@@ -1770,7 +1820,7 @@ def generate_esa_pdf(course_dir: Path, course_prefix: str) -> bool:
 
     except Exception as e:
         print(f"{Fore.RED}✗{Style.RESET_ALL}")
-        logger.error(f"FAILURE [generate_esa_pdf]: Failed to generate ESA PDF - {e}")
+        logger.error(f"Failed to generate ESA PDF: {e}")
         logger.error(f"Course Directory: {course_dir}")
         logger.error(f"Course Prefix: {course_prefix}")
         return False
@@ -1785,6 +1835,7 @@ def batch_download_all(
     class_filter: Optional[List[int]] = None,
     skip_merge: bool = False,
     max_workers: Optional[int] = None,
+    content_type_id: str = "2",
 ) -> None:
     """
     Download all PDFs for units in a course automatically.
@@ -1797,9 +1848,13 @@ def batch_download_all(
         unit_filter: List of unit numbers to download (None = all units)
         class_filter: List of class numbers to download per unit (None = all classes)
         skip_merge: If True, don't merge PDFs into single file per unit
+        content_type_id: "2" for Slides, "3" for Notes
     """
+    content_label = "Notes" if content_type_id == "3" else "Slides"
+    # Suffix for filenames when downloading notes
+    content_suffix = "_notes" if content_type_id == "3" else ""
     print(
-        f"{Fore.YELLOW}{Style.BRIGHT}Batch Download - All Course Materials{Style.RESET_ALL}"
+        f"{Fore.YELLOW}{Style.BRIGHT}Batch Download - {content_label}{Style.RESET_ALL}"
     )
 
     # Setup course-specific failure log using same naming as directory
@@ -1819,7 +1874,7 @@ def batch_download_all(
     safe_name = "-".join(safe_name.split())
 
     course_prefix = f"{subject_code}-{safe_name}"
-    course_log_file = course_dir / f"{course_prefix}_failures.log"
+    course_log_file = course_dir / f"{course_prefix}{content_suffix}_failures.log"
 
     # Reconfigure logger with course-specific log file
     global logger
@@ -1830,7 +1885,9 @@ def batch_download_all(
 
     # Load existing summary (if available) so we can avoid re-downloading/remaring unchanged files
     existing_summary = None
-    summary_file_path = course_dir / f"{course_prefix}_course_summary.json"
+    summary_file_path = (
+        course_dir / f"{course_prefix}{content_suffix}_course_summary.json"
+    )
     if summary_file_path.exists():
         try:
             with open(summary_file_path, "r", encoding="utf-8") as sf:
@@ -1838,7 +1895,7 @@ def batch_download_all(
         except Exception:
             existing_summary = None
     if not units:
-        print("\n❌ Failed to fetch units.")
+        print(f"\n{Fore.RED}✗{Style.RESET_ALL} Failed to fetch units.")
         return
 
     # Filter units if specified
@@ -1847,7 +1904,9 @@ def batch_download_all(
             (idx, u) for idx, u in enumerate(units, 1) if idx in unit_filter
         ]
         if not filtered_units:
-            print(f"\n❌ No units found matching filter: {unit_filter}")
+            print(
+                f"\n{Fore.RED}✗{Style.RESET_ALL} No units found matching filter: {unit_filter}"
+            )
             return
         print(
             f"{Fore.MAGENTA}Found {len(units)} total units. Downloading {len(filtered_units)} unit(s): {unit_filter}{Style.RESET_ALL}"
@@ -1886,7 +1945,7 @@ def batch_download_all(
         # Get classes
         classes = fetcher.get_unit_classes(unit_id)
         if not classes:
-            print(f"  {Fore.YELLOW}⚠ No classes found{Style.RESET_ALL}")
+            print(f"  {Fore.YELLOW}⚠{Style.RESET_ALL} No classes found")
             summary["units"].append(
                 {
                     "unit_number": unit_idx,
@@ -1959,7 +2018,7 @@ def batch_download_all(
                 c for c in class_name if c.isalnum() or c in (" ", "-", "_")
             ).strip()[:50]
             padded_num = str(class_idx).zfill(2)  # 01, 02, 03, etc.
-            output_path = unit_dir / f"{padded_num}_{safe_name}.pdf"
+            output_path = unit_dir / f"{padded_num}_{safe_name}{content_suffix}.pdf"
 
             class_info = {
                 "class_number": class_idx,
@@ -1976,6 +2035,7 @@ def batch_download_all(
                 output_path,
                 class_name,
                 existing_summary=existing_summary,
+                content_type_id=content_type_id,
             )
 
             return class_info, downloaded_files
@@ -1999,14 +2059,14 @@ def batch_download_all(
                 "MAX_WORKERS"
             )
             try:
-                workers = int(_max_workers_env) if _max_workers_env is not None else 5
+                workers = int(_max_workers_env) if _max_workers_env is not None else 10
                 if workers <= 0:
                     raise ValueError("must be > 0")
             except Exception:
                 logger.warning(
-                    f"Invalid PDF_FETCHER_MAX_WORKERS='{_max_workers_env}', falling back to 5"
+                    f"Invalid PDF_FETCHER_MAX_WORKERS='{_max_workers_env}', falling back to 10"
                 )
-                workers = 5
+                workers = 10
 
         logger.debug(f"Using max_workers={workers} for concurrent downloads")
 
@@ -2062,8 +2122,8 @@ def batch_download_all(
                     or not pdf_path.exists()
                     or pdf_path.stat().st_size == 0
                 ):
-                    logger.warning(
-                        f"Conversion failed or produced empty PDF for {src_path.name}"
+                    print(
+                        f"    {Fore.YELLOW}?{Style.RESET_ALL} Conversion failed or produced empty PDF for {src_path.name}"
                     )
                     return None
 
@@ -2097,7 +2157,6 @@ def batch_download_all(
             leave=False,
             bar_format="{desc}: {percentage:3.0f}%|{bar}| {n_fmt}/{total_fmt} [{elapsed}<{remaining}]",
         ) as pbar:
-
             with ThreadPoolExecutor(max_workers=workers) as executor:
                 # Submit all download tasks
                 future_to_class = {
@@ -2178,7 +2237,9 @@ def batch_download_all(
                             # logger.error(f"  Class ID: {class_info['class_id']}")
                             total_failed += 1
                             unit_summary["failed_files"] += 1
-                            pbar.write(f"    {Fore.RED}✗{Style.RESET_ALL} {class_name}")
+                            pbar.write(
+                                f"    {Fore.YELLOW}?{Style.RESET_ALL} {class_name}"
+                            )
 
                         unit_summary["classes"].append(class_info)
                         pbar.update(1)
@@ -2298,7 +2359,9 @@ def batch_download_all(
                 end="",
                 flush=True,
             )
-            merged_pdf_path = unit_dir / f"{course_prefix}_u{unit_idx}_merged.pdf"
+            merged_pdf_path = (
+                unit_dir / f"{course_prefix}_u{unit_idx}{content_suffix}_merged.pdf"
+            )
             if merge_pdfs(pdf_files_only, merged_pdf_path):
                 print(f"{Fore.GREEN}✓{Style.RESET_ALL}")
                 unit_summary["merged_pdf"] = merged_pdf_path.name
@@ -2326,16 +2389,18 @@ def batch_download_all(
     summary["total_failed"] = total_failed
 
     # Save summary to JSON file with course prefix
-    summary_file = course_dir / f"{course_prefix}_course_summary.json"
+    summary_file = course_dir / f"{course_prefix}{content_suffix}_course_summary.json"
     with open(summary_file, "w", encoding="utf-8") as f:
         json.dump(summary, f, indent=2, ensure_ascii=False)
 
     # Generate ESA PDF (combining all 4 units) unless skip_merge is set
     if not skip_merge:
         print()
-        esa_created = generate_esa_pdf(course_dir, course_prefix)
+        esa_created = generate_esa_pdf(
+            course_dir, course_prefix, content_suffix=content_suffix
+        )
         if esa_created:
-            esa_pdf_path = course_dir / f"{course_prefix}_ESA.pdf"
+            esa_pdf_path = course_dir / f"{course_prefix}{content_suffix}_ESA.pdf"
             try:
                 summary["esa_pdf"] = esa_pdf_path.name
                 summary["esa_pdf_sha"] = compute_file_sha256(esa_pdf_path)
@@ -2363,6 +2428,7 @@ def interactive_mode(
     skip_merge: bool = False,
     output_dir: Optional[str] = None,
     max_workers: Optional[int] = None,
+    content_type_id: str = "2",
 ) -> None:
     """Run the PDF fetcher in interactive mode with optional filters."""
 
@@ -2370,7 +2436,7 @@ def interactive_mode(
         # Step 1: Get subject codes
         subjects = fetcher.get_subjects_code()
         if not subjects:
-            print("\n❌ Failed to fetch subjects. Exiting.")
+            print(f"\n{Fore.RED}✗{Style.RESET_ALL} Failed to fetch subjects. Exiting.")
             return
 
         # Save all subjects to JSON file
@@ -2396,7 +2462,9 @@ def interactive_mode(
                     ]
 
                     if not matches:
-                        print(f"\n❌ No courses found matching pattern '{pattern}'")
+                        print(
+                            f"\n{Fore.RED}✗{Style.RESET_ALL} No courses found matching pattern '{pattern}'"
+                        )
                         return
 
                     print(
@@ -2407,11 +2475,11 @@ def interactive_mode(
 
                     # Download all matching courses
                     for idx, match in enumerate(matches, 1):
-                        print(f"\n{'='*60}")
+                        print(f"\n{'=' * 60}")
                         print(
                             f"[{idx}/{len(matches)}] Processing: {match['subjectCode']}"
                         )
-                        print(f"{'='*60}")
+                        print(f"{'=' * 60}")
 
                         course_id = match["id"]
                         course_name = match["subjectName"]
@@ -2449,12 +2517,13 @@ def interactive_mode(
                             class_filter,
                             skip_merge,
                             max_workers=max_workers,
+                            content_type_id=content_type_id,
                         )
 
                     return
 
                 except re.error as e:
-                    print(f"\n❌ Invalid regex pattern: {e}")
+                    print(f"\n{Fore.RED}✗{Style.RESET_ALL} Invalid regex pattern: {e}")
                     return
 
             # Try to match by ID first, then by subject code
@@ -2467,7 +2536,9 @@ def interactive_mode(
                 None,
             )
             if not course_match:
-                print(f"\n❌ Course code '{course_code}' not found.")
+                print(
+                    f"\n{Fore.RED}✗{Style.RESET_ALL} Course code '{course_code}' not found."
+                )
                 print(
                     f"Hint: Use course ID or subject code (e.g., '20975' or 'UE23CS342AA3')"
                 )
@@ -2497,6 +2568,7 @@ def interactive_mode(
                     ["fzf", "--prompt=Select course: ", "--height=40%", "--reverse"],
                     input=fzf_input,
                     text=True,
+                    encoding="utf-8",
                     capture_output=True,
                 )
 
@@ -2514,7 +2586,7 @@ def interactive_mode(
                 parts = selected.split(" | ")
                 course_id = parts[0].strip()
                 course_name = " | ".join(parts[1:]) if len(parts) > 1 else selected
-                print(f"\n✓ Selected: {course_name}")
+                print(f"\n{Fore.GREEN}✓{Style.RESET_ALL} Selected: {course_name}")
 
             except FileNotFoundError:
                 logger.error("fzf not found. Please install fzf: brew install fzf")
@@ -2545,12 +2617,16 @@ def interactive_mode(
                         if search_term.lower() in s.get("subjectName", "").lower()
                     ]
                     if not matches:
-                        print(f"\n❌ No courses found matching '{search_term}'")
+                        print(
+                            f"\n{Fore.RED}✗{Style.RESET_ALL} No courses found matching '{search_term}'"
+                        )
                         return
                     if len(matches) == 1:
                         course_id = matches[0]["id"]
                         course_name = matches[0]["subjectName"]
-                        print(f"\n✓ Selected: {course_name}")
+                        print(
+                            f"\n{Fore.GREEN}✓{Style.RESET_ALL} Selected: {course_name}"
+                        )
                     else:
                         print_table(
                             matches[:20],
@@ -2593,7 +2669,7 @@ def interactive_mode(
                 for idx, unit in enumerate(units, 1):
                     print(f"  {idx}. {unit['unit']}")
             else:
-                print("\n❌ Failed to fetch units.")
+                print(f"\n{Fore.RED}✗{Style.RESET_ALL} Failed to fetch units.")
             return
 
         # Load base directory from environment variable or use default
@@ -2614,6 +2690,7 @@ def interactive_mode(
                 class_filter,
                 skip_merge,
                 max_workers=max_workers,
+                content_type_id=content_type_id,
             )
             return
 
@@ -2626,7 +2703,12 @@ def interactive_mode(
 
         if mode == "1":
             batch_download_all(
-                fetcher, course_id, course_name, course_dir, max_workers=max_workers
+                fetcher,
+                course_id,
+                course_name,
+                course_dir,
+                max_workers=max_workers,
+                content_type_id=content_type_id,
             )
             return
 
@@ -2634,7 +2716,9 @@ def interactive_mode(
         # Step 2: Get course units
         units = fetcher.get_course_units(course_id)
         if not units:
-            print("\n❌ Failed to fetch units for this course. Exiting.")
+            print(
+                f"\n{Fore.RED}✗{Style.RESET_ALL} Failed to fetch units for this course. Exiting."
+            )
             return
 
         # Save units to JSON file
@@ -2661,6 +2745,7 @@ def interactive_mode(
                 ["fzf", "--prompt=Select unit: ", "--height=40%", "--reverse"],
                 input=fzf_input,
                 text=True,
+                encoding="utf-8",
                 capture_output=True,
             )
 
@@ -2690,7 +2775,9 @@ def interactive_mode(
         # Step 3: Get unit classes
         classes = fetcher.get_unit_classes(unit_id)
         if not classes:
-            print("\n❌ Failed to fetch classes for this unit. Exiting.")
+            print(
+                f"\n{Fore.RED}✗{Style.RESET_ALL} Failed to fetch classes for this unit. Exiting."
+            )
             return
 
         # Save classes to JSON file
@@ -2720,6 +2807,7 @@ def interactive_mode(
                 ["fzf", "--prompt=Select class: ", "--height=40%", "--reverse"],
                 input=fzf_input,
                 text=True,
+                encoding="utf-8",
                 capture_output=True,
             )
 
@@ -2759,9 +2847,11 @@ def interactive_mode(
         success = fetcher.download_pdf(course_id, class_id, output_path)
 
         if success:
-            print("\n✓ PDF download completed successfully!")
+            print(
+                f"\n{Fore.GREEN}✓{Style.RESET_ALL} PDF download completed successfully!"
+            )
         else:
-            print("\n❌ PDF download failed.")
+            print(f"\n{Fore.RED}✗{Style.RESET_ALL} PDF download failed.")
 
     except KeyboardInterrupt:
         print("\n\nInterrupted by user. Exiting...")
@@ -2833,6 +2923,12 @@ Examples:
         help="Skip merging PDFs into a single file per unit",
     )
     parser.add_argument(
+        "-n",
+        "--notes",
+        action="store_true",
+        help="Download Notes instead of Slides",
+    )
+    parser.add_argument(
         "--update-index",
         action="store_true",
         help="Only update the courses index.json file (no download)",
@@ -2871,7 +2967,9 @@ Examples:
             update_courses_index(base_dir)
             print(f"✓ Updated index.json in {base_dir}")
         else:
-            print(f"❌ Courses directory not found: {base_dir}")
+            print(
+                f"{Fore.RED}✗{Style.RESET_ALL} Courses directory not found: {base_dir}"
+            )
         return
 
     # Parse unit filter (e.g., "1,3,4" or "1-3")
@@ -2895,6 +2993,9 @@ Examples:
                 class_filter.extend(range(start, end + 1))
             else:
                 class_filter.append(int(part))
+
+    # Determine content type: Notes (id=3) or Slides (id=2, default)
+    content_type_id = "3" if args.notes else "2"
 
     print(f"{Fore.CYAN}{Style.BRIGHT}  \\_()_/{Style.RESET_ALL}")
     print(f"{Fore.CYAN}{Style.BRIGHT}  (o.o){Style.RESET_ALL}")
@@ -2925,7 +3026,7 @@ Examples:
         password = getpass.getpass("Password: ").strip()
 
     if not username or not password:
-        print("❌ Username and password are required.")
+        print(f"{Fore.RED}✗{Style.RESET_ALL} Username and password are required.")
         sys.exit(1)
 
     # Create fetcher and login
@@ -2967,6 +3068,7 @@ Examples:
                 args.no_merge,
                 args.output,
                 args.max_workers,
+                content_type_id=content_type_id,
             )
         else:
             # Non-pattern mode: allow multiple -c values (action=append or space-separated). If none provided, go into interactive selection.
@@ -2984,6 +3086,7 @@ Examples:
                         args.no_merge,
                         args.output,
                         args.max_workers,
+                        content_type_id=content_type_id,
                     )
             else:
                 # No course provided: enter interactive selection
@@ -2996,6 +3099,7 @@ Examples:
                     args.no_merge,
                     args.output,
                     args.max_workers,
+                    content_type_id=content_type_id,
                 )
 
     except AuthenticationError as e:

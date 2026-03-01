@@ -76567,7 +76567,7 @@
   {
     "id": "20613",
     "subjectCode": "UE25CS151A",
-    "subjectName": "UE25CS151A-Python for computational problem solving"
+    "subjectName": "UE25CS151A-Python for Computational Problem Solving"
   },
   {
     "id": "20614",
@@ -76577,7 +76577,7 @@
   {
     "id": "20615",
     "subjectCode": "UE25CV141A",
-    "subjectName": "UE25CV141A-Engineering Mechanics-Statics"
+    "subjectName": "UE25CV141A-Engineering Mechanics - Statics"
   },
   {
     "id": "20616",
@@ -79892,7 +79892,7 @@
   {
     "id": "21278",
     "subjectCode": "UQ24CA752A",
-    "subjectName": "UQ24CA752A-Web Application Frameworks II"
+    "subjectName": "UQ24CA752A-Web Application Frameworks - II"
   },
   {
     "id": "21279",
@@ -82141,8 +82141,8 @@
   },
   {
     "id": "21728",
-    "subjectCode": "UE23AM342BB2",
-    "subjectName": "UE23AM342BB2-Large language Models and Their Applications"
+    "subjectCode": "UE23AM343BB2",
+    "subjectName": "UE23AM343BB2-Large language Models and Their Applications"
   },
   {
     "id": "21729",
@@ -82227,7 +82227,7 @@
   {
     "id": "21745",
     "subjectCode": "UL22BL443B",
-    "subjectName": "UL22BL443B-Human rights and Practice"
+    "subjectName": "UL22BL443B-Human Rights Law and Practice"
   },
   {
     "id": "21746",
@@ -82287,7 +82287,7 @@
   {
     "id": "21757",
     "subjectCode": "UL23BL344B",
-    "subjectName": "UL23BL344B-Professional Ethics"
+    "subjectName": "UL23BL344B-Professional Ethics and Professional Accounting System"
   },
   {
     "id": "21758",
@@ -82301,13 +82301,13 @@
   },
   {
     "id": "21760",
-    "subjectCode": "UL23BB441B",
-    "subjectName": "UL23BB441B-Global Business Environment"
+    "subjectCode": "UL23BB341B",
+    "subjectName": "UL23BB341B-Global Business Environment"
   },
   {
     "id": "21761",
-    "subjectCode": "UL23BB442B",
-    "subjectName": "UL23BB442B-Start-Up and Entrepreneurship Development"
+    "subjectCode": "UL23BB342B",
+    "subjectName": "UL23BB342B-Start-Up and Entrepreneurship Development"
   },
   {
     "id": "21762",
@@ -84013,5 +84013,755 @@
     "id": "22102",
     "subjectCode": "UH24ML201",
     "subjectName": "UH24ML201-Biochemistry - II"
+  },
+  {
+    "id": "22103",
+    "subjectCode": "UP25MPA641A",
+    "subjectName": "UP25MPA641A-Modern Pharmaceutical Analytical Techniques"
+  },
+  {
+    "id": "22104",
+    "subjectCode": "UP25MPU641A",
+    "subjectName": "UP25MPU641A-Drug Delivery System"
+  },
+  {
+    "id": "22105",
+    "subjectCode": "UP25MPU642A",
+    "subjectName": "UP25MPU642A-Modern Pharmaceutics"
+  },
+  {
+    "id": "22106",
+    "subjectCode": "UP25MPU643A",
+    "subjectName": "UP25MPU643A-Regulatory Affairs"
+  },
+  {
+    "id": "22107",
+    "subjectCode": "UP25MPA642A",
+    "subjectName": "UP25MPA642A-Advanced Pharmaceutical Analysis"
+  },
+  {
+    "id": "22108",
+    "subjectCode": "UP25MPA643A",
+    "subjectName": "UP25MPA643A-Pharmaceutical Validation"
+  },
+  {
+    "id": "22109",
+    "subjectCode": "UP25MPA644A",
+    "subjectName": "UP25MPA644A-Food Analysis"
+  },
+  {
+    "id": "22110",
+    "subjectCode": "UP25MPU644A",
+    "subjectName": "UP25MPU644A-Pharmaceutics Practical I"
+  },
+  {
+    "id": "22111",
+    "subjectCode": "UP25MPA621A",
+    "subjectName": "UP25MPA621A-Modern Pharmaceutical Analysis Practical"
+  },
+  {
+    "id": "22112",
+    "subjectCode": "UP25MPC641A",
+    "subjectName": "UP25MPC641A-Advanced Pharmacology-I"
+  },
+  {
+    "id": "22113",
+    "subjectCode": "UP25MPC642A",
+    "subjectName": "UP25MPC642A-Pharmacological & Toxicological Screening Methods-I"
+  },
+  {
+    "id": "22114",
+    "subjectCode": "UP25MPC643A",
+    "subjectName": "UP25MPC643A-Cellular & Molecular Pharmacology"
+  },
+  {
+    "id": "22115",
+    "subjectCode": "UP25MPA645A",
+    "subjectName": "UP25MPA645A-Pharmaceutical Analysis Practical I"
+  },
+  {
+    "id": "22116",
+    "subjectCode": "UP25MPU645A",
+    "subjectName": "UP25MPU645A-Seminar/Assignment"
+  },
+  {
+    "id": "22117",
+    "subjectCode": "UP25MPC644A",
+    "subjectName": "UP25MPC644A-Pharmacology Practical I"
+  },
+  {
+    "id": "22118",
+    "subjectCode": "UP25MPA646A",
+    "subjectName": "UP25MPA646A-Seminar/Assignment"
+  },
+  {
+    "id": "22119",
+    "subjectCode": "UP25MPC645A",
+    "subjectName": "UP25MPC645A-Seminar/Assignment"
+  },
+  {
+    "id": "22120",
+    "subjectCode": "UM25BD001",
+    "subjectName": "UM25BD001-Mentor Mentee"
+  },
+  {
+    "id": "22121",
+    "subjectCode": "UM25BC101",
+    "subjectName": "UM25BC101-Guest Talk"
+  },
+  {
+    "id": "22122",
+    "subjectCode": "UM24BC101",
+    "subjectName": "UM24BC101-Guest Talk"
+  },
+  {
+    "id": "22123",
+    "subjectCode": "Engineering Thermodynamics & its Applications",
+    "subjectName": "Engineering Thermodynamics & its Applications-TESTME001"
+  },
+  {
+    "id": "22124",
+    "subjectCode": "Manufacturing Technology",
+    "subjectName": "Manufacturing Technology-TESTME002"
+  },
+  {
+    "id": "22125",
+    "subjectCode": "Mathematics for Mechanical Engineers",
+    "subjectName": "Mathematics for Mechanical Engineers-TESTME003"
+  },
+  {
+    "id": "22126",
+    "subjectCode": "Python for Computational Problem Solving",
+    "subjectName": "Python for Computational Problem Solving-TESTME003"
+  },
+  {
+    "id": "22127",
+    "subjectCode": "Engineering Mechanics",
+    "subjectName": "Engineering Mechanics-TESTME003"
+  },
+  {
+    "id": "22128",
+    "subjectCode": "Data Visualization",
+    "subjectName": "Data Visualization-TESTME006"
+  },
+  {
+    "id": "22129",
+    "subjectCode": "TESTME001",
+    "subjectName": "TESTME001-Engineering Thermodynamics & its Applications"
+  },
+  {
+    "id": "22130",
+    "subjectCode": "TESTME002",
+    "subjectName": "TESTME002-Manufacturing Technology"
+  },
+  {
+    "id": "22131",
+    "subjectCode": "TESTME003",
+    "subjectName": "TESTME003-Mathematics for Mechanical Engineers"
+  },
+  {
+    "id": "22132",
+    "subjectCode": "TESTME004",
+    "subjectName": "TESTME004-Python for Computational Problem Solving"
+  },
+  {
+    "id": "22133",
+    "subjectCode": "TESTME005",
+    "subjectName": "TESTME005-Engineering Mechanics"
+  },
+  {
+    "id": "22134",
+    "subjectCode": "TESTME006",
+    "subjectName": "TESTME006-Data Visualization"
+  },
+  {
+    "id": "22135",
+    "subjectCode": "UX25ME251A",
+    "subjectName": "UX25ME251A-Engineering Thermodynamics & its Applications"
+  },
+  {
+    "id": "22136",
+    "subjectCode": "UX25ME252A",
+    "subjectName": "UX25ME252A-Manufacturing Technology"
+  },
+  {
+    "id": "22137",
+    "subjectCode": "UX25MA241A",
+    "subjectName": "UX25MA241A-Mathematics for Mechanical Engineers"
+  },
+  {
+    "id": "22138",
+    "subjectCode": "UX25CS241A",
+    "subjectName": "UX25CS241A-Python for Computational Problem Solving"
+  },
+  {
+    "id": "22139",
+    "subjectCode": "UX25ME241A",
+    "subjectName": "UX25ME241A-Engineering Mechanics"
+  },
+  {
+    "id": "22140",
+    "subjectCode": "UX25ME221A",
+    "subjectName": "UX25ME221A-Data Visualization"
+  },
+  {
+    "id": "22141",
+    "subjectCode": "UM24MB731B",
+    "subjectName": "UM24MB731B-Advance Corporate Finance"
+  },
+  {
+    "id": "22142",
+    "subjectCode": "UM24MB732B",
+    "subjectName": "UM24MB732B-Organisational Development and Diagnostic intervention"
+  },
+  {
+    "id": "22143",
+    "subjectCode": "UM24MB733B",
+    "subjectName": "UM24MB733B-B2B Marketing"
+  },
+  {
+    "id": "22144",
+    "subjectCode": "UM24MB734B",
+    "subjectName": "UM24MB734B-Data Privacy and Data Security"
+  },
+  {
+    "id": "22145",
+    "subjectCode": "UM24MB735B",
+    "subjectName": "UM24MB735B-Enterprise Resource Planning"
+  },
+  {
+    "id": "22146",
+    "subjectCode": "UM24MB741B",
+    "subjectName": "UM24MB741B-Geopolitics"
+  },
+  {
+    "id": "22147",
+    "subjectCode": "UM24MB742B",
+    "subjectName": "UM24MB742B-Internship and Project"
+  },
+  {
+    "id": "22148",
+    "subjectCode": "UE25EC641B",
+    "subjectName": "UE25EC641B-Advanced Digital Design using Verilog and Verification"
+  },
+  {
+    "id": "22149",
+    "subjectCode": "UE25EC642B",
+    "subjectName": "UE25EC642B-Machine Learning Techniques"
+  },
+  {
+    "id": "22150",
+    "subjectCode": "25CERT03",
+    "subjectName": "25CERT03-Certification Program"
+  },
+  {
+    "id": "22151",
+    "subjectCode": "UX25EC642B",
+    "subjectName": "UX25EC642B-Design For Test for SoCs"
+  },
+  {
+    "id": "22152",
+    "subjectCode": "UX25EC631B",
+    "subjectName": "UX25EC631B-AI Accelerator Design"
+  },
+  {
+    "id": "22153",
+    "subjectCode": "UX25EC641B",
+    "subjectName": "UX25EC641B-SoC Verification using SystemVerilog & SVA"
+  },
+  {
+    "id": "22154",
+    "subjectCode": "UX24MB742B",
+    "subjectName": "UX24MB742B-Project Management"
+  },
+  {
+    "id": "22155",
+    "subjectCode": "UX24MB741B",
+    "subjectName": "UX24MB741B-Human Resource Management"
+  },
+  {
+    "id": "22156",
+    "subjectCode": "UX24MB751B",
+    "subjectName": "UX24MB751B-Digital Marketing"
+  },
+  {
+    "id": "22157",
+    "subjectCode": "UX24MB752B",
+    "subjectName": "UX24MB752B-Digital Transformation"
+  },
+  {
+    "id": "22158",
+    "subjectCode": "UE25BT845A",
+    "subjectName": "UE25BT845A-ADVANCED VERMITECHNOLOGY"
+  },
+  {
+    "id": "22159",
+    "subjectCode": "UE25BT846A",
+    "subjectName": "UE25BT846A-ANIMAL CELL CULTURE AND TECHNOLOGY"
+  },
+  {
+    "id": "22160",
+    "subjectCode": "UE25BT847A",
+    "subjectName": "UE25BT847A-APPLIED AGRICULTURAL BIOTECHNOLOGY"
+  },
+  {
+    "id": "22161",
+    "subjectCode": "UE25BT848A",
+    "subjectName": "UE25BT848A-BIOINFORMATICS FOR RESEARCH"
+  },
+  {
+    "id": "22162",
+    "subjectCode": "UE25BT84DA",
+    "subjectName": "UE25BT84DA-ADVANCED CELLULAR AND MOLECULAR BIOLOGY"
+  },
+  {
+    "id": "22163",
+    "subjectCode": "UE25BT84FA",
+    "subjectName": "UE25BT84FA-ADVANCED DRUG DEVELOPMENT & TOXICOLOGY"
+  },
+  {
+    "id": "22164",
+    "subjectCode": "UE25BT84HA",
+    "subjectName": "UE25BT84HA-ENVIRONMENTAL SCIENCE & ENGINEERING"
+  },
+  {
+    "id": "22165",
+    "subjectCode": "UE25BT84OA",
+    "subjectName": "UE25BT84OA-ADVANCED NANOSCIENCE AND ENGINEERING"
+  },
+  {
+    "id": "22166",
+    "subjectCode": "UE25EC841A",
+    "subjectName": "UE25EC841A-MACHINE LEARNING AND REINFORCEMENT LEARNING"
+  },
+  {
+    "id": "22167",
+    "subjectCode": "UE25EC842A",
+    "subjectName": "UE25EC842A-WIRELESS COMMUNICATION SYSTEMS FOR 6G &  IOT"
+  },
+  {
+    "id": "22168",
+    "subjectCode": "UE25EC843A",
+    "subjectName": "UE25EC843A-DESIGN AND ANALYSIS OF ALGORITHMS"
+  },
+  {
+    "id": "22169",
+    "subjectCode": "UE25EC844A",
+    "subjectName": "UE25EC844A-DEEP LEARNING"
+  },
+  {
+    "id": "22170",
+    "subjectCode": "UE25EC845A",
+    "subjectName": "UE25EC845A-INTRODUCTION TO LARGE LANGUAGE MODELS"
+  },
+  {
+    "id": "22171",
+    "subjectCode": "UE25EE841A",
+    "subjectName": "UE25EE841A-ADVANCED SOLAR PHOTOVOLTAIC SYSTEMS"
+  },
+  {
+    "id": "22172",
+    "subjectCode": "UM25MB845A",
+    "subjectName": "UM25MB845A-HOSPITAL MANAGEMENT INFORMATION SYSTEM & HEALTH INFORMATICS"
+  },
+  {
+    "id": "22173",
+    "subjectCode": "UP25PD843A",
+    "subjectName": "UP25PD843A-PHYTOCHEMISTRY & PHARMACOGNOSTIC TECHNIQUES"
+  },
+  {
+    "id": "22174",
+    "subjectCode": "UP25PD844A",
+    "subjectName": "UP25PD844A-PHARMACEUTICAL EVIDENCE BASED PRACTICE"
+  },
+  {
+    "id": "22175",
+    "subjectCode": "UP25PD845A",
+    "subjectName": "UP25PD845A-PRECISION CARDIOVASCULAR MEDICINE & PHARMACOGENOMICS"
+  },
+  {
+    "id": "22176",
+    "subjectCode": "UP25PD846A",
+    "subjectName": "UP25PD846A-DRUG DISCOVERY"
+  },
+  {
+    "id": "22177",
+    "subjectCode": "UB25PY847A",
+    "subjectName": "UB25PY847A-FUNDAMENTALS OF SOCIAL ANXIETY & CLASSICAL THERAPEUTIC APPROACH"
+  },
+  {
+    "id": "22178",
+    "subjectCode": "UB25PY848A",
+    "subjectName": "UB25PY848A-CONTEMPORARY INTERVENTIONS AND CROSS-CULTURAL ASPECTS OF SOCIAL ANXIETY"
+  },
+  {
+    "id": "22179",
+    "subjectCode": "UB25PY849A",
+    "subjectName": "UB25PY849A-CONSCIOUSNESS, INTELLIGENCE & HUMAN DECISION MAKING"
+  },
+  {
+    "id": "22180",
+    "subjectCode": "UB25PY84AA",
+    "subjectName": "UB25PY84AA-MEANING PURPOSE & HUMAN FLOURISHING IN ORGANIZATIONS"
+  },
+  {
+    "id": "22181",
+    "subjectCode": "UB25PY84BA",
+    "subjectName": "UB25PY84BA-GENDER & SEXUALITY DEVELOPMENT IN ADOLESCENCE"
+  },
+  {
+    "id": "22182",
+    "subjectCode": "UB25PY84CA",
+    "subjectName": "UB25PY84CA-SOCIAL CONSTRUCTS OF GENDER & NORMATIVE CHANGE"
+  },
+  {
+    "id": "22183",
+    "subjectCode": "UB25PY84DA",
+    "subjectName": "UB25PY84DA-FLOW AESTHETIC EXPERIENCE & PERFORMANCE PSYCHOLOGY"
+  },
+  {
+    "id": "22184",
+    "subjectCode": "UB25PY84EA",
+    "subjectName": "UB25PY84EA-RESEARCH METHODS IN PERFORMANCE & CULTURAL PSYCHOLOGY"
+  },
+  {
+    "id": "22185",
+    "subjectCode": "UE25MA844A",
+    "subjectName": "UE25MA844A-QUEUEING THEORY"
+  },
+  {
+    "id": "22186",
+    "subjectCode": "UE25MA845A",
+    "subjectName": "UE25MA845A-STOCHASTIC  PROCESSES"
+  },
+  {
+    "id": "22187",
+    "subjectCode": "UM25MB846A",
+    "subjectName": "UM25MB846A-INFORMATION SOURCES, SYSTEM AND SERVICES"
+  },
+  {
+    "id": "22188",
+    "subjectCode": "UE21CS841A64",
+    "subjectName": "UE21CS841A64-COMPUTER VISION"
+  },
+  {
+    "id": "22189",
+    "subjectCode": "25PU233",
+    "subjectName": "25PU233-PHYSICS"
+  },
+  {
+    "id": "22190",
+    "subjectCode": "25PU234",
+    "subjectName": "25PU234-CHEMISTRY"
+  },
+  {
+    "id": "22191",
+    "subjectCode": "25PU235",
+    "subjectName": "25PU235-MATHEMATICS"
+  },
+  {
+    "id": "22192",
+    "subjectCode": "25PU236",
+    "subjectName": "25PU236-BIOLOGY"
+  },
+  {
+    "id": "22193",
+    "subjectCode": "25PU241",
+    "subjectName": "25PU241-COMPUTER SCIENCE"
+  },
+  {
+    "id": "22194",
+    "subjectCode": "25PU240",
+    "subjectName": "25PU240-ELECTRONICS"
+  },
+  {
+    "id": "22195",
+    "subjectCode": "25PU201",
+    "subjectName": "25PU201-KANNADA"
+  },
+  {
+    "id": "22196",
+    "subjectCode": "25PU209",
+    "subjectName": "25PU209-SANSKRIT"
+  },
+  {
+    "id": "22197",
+    "subjectCode": "25PU203",
+    "subjectName": "25PU203-HINDI"
+  },
+  {
+    "id": "22198",
+    "subjectCode": "25PU205",
+    "subjectName": "25PU205-TELUGU"
+  },
+  {
+    "id": "22199",
+    "subjectCode": "25PU202",
+    "subjectName": "25PU202-ENGLISH"
+  },
+  {
+    "id": "22200",
+    "subjectCode": "25PU227",
+    "subjectName": "25PU227-BUSINESS STUDIES"
+  },
+  {
+    "id": "22201",
+    "subjectCode": "25PU230",
+    "subjectName": "25PU230-ACCOUNTANCY"
+  },
+  {
+    "id": "22202",
+    "subjectCode": "25PU222",
+    "subjectName": "25PU222-ECONOMICS"
+  },
+  {
+    "id": "22203",
+    "subjectCode": "25PU224",
+    "subjectName": "25PU224-GEOGRAPHY"
+  },
+  {
+    "id": "22204",
+    "subjectCode": "25PU275",
+    "subjectName": "25PU275-BASIC MATHS"
+  },
+  {
+    "id": "22205",
+    "subjectCode": "25PU231",
+    "subjectName": "25PU231-STATISTICS"
+  },
+  {
+    "id": "22206",
+    "subjectCode": "UM25MB651B",
+    "subjectName": "UM25MB651B-Business Forecasting"
+  },
+  {
+    "id": "22207",
+    "subjectCode": "UM25MB652B",
+    "subjectName": "UM25MB652B-Corporate Finance"
+  },
+  {
+    "id": "22208",
+    "subjectCode": "UM25MB653B",
+    "subjectName": "UM25MB653B-Managing People and Performance in Organisations"
+  },
+  {
+    "id": "22209",
+    "subjectCode": "UM25MB654B",
+    "subjectName": "UM25MB654B-Strategic Management"
+  },
+  {
+    "id": "22210",
+    "subjectCode": "UM25MB621B",
+    "subjectName": "UM25MB621B-Customer and Market Research"
+  },
+  {
+    "id": "22211",
+    "subjectCode": "UM25MB622B",
+    "subjectName": "UM25MB622B-Generative AI in Transforming Learning Landscapes"
+  },
+  {
+    "id": "22212",
+    "subjectCode": "UM25MB624B",
+    "subjectName": "UM25MB624B-Panel Data Analysis"
+  },
+  {
+    "id": "22213",
+    "subjectCode": "UM25MB625B",
+    "subjectName": "UM25MB625B-Positive Psychology at the Workplace"
+  },
+  {
+    "id": "22214",
+    "subjectCode": "UM25MB626B",
+    "subjectName": "UM25MB626B-Production and Operations Management"
+  },
+  {
+    "id": "22215",
+    "subjectCode": "UQ25CA651B",
+    "subjectName": "UQ25CA651B-Algorithms Analysis and Design"
+  },
+  {
+    "id": "22216",
+    "subjectCode": "UQ25CA652B",
+    "subjectName": "UQ25CA652B-Data Communication and Networking"
+  },
+  {
+    "id": "22217",
+    "subjectCode": "UQ25CA653B",
+    "subjectName": "UQ25CA653B-Artificial Intelligence and Machine Learning"
+  },
+  {
+    "id": "22218",
+    "subjectCode": "UQ25CA654B",
+    "subjectName": "UQ25CA654B-Web Application Frameworks - I"
+  },
+  {
+    "id": "22219",
+    "subjectCode": "UQ25CA601B",
+    "subjectName": "UQ25CA601B-Aptitude and Reasoning"
+  },
+  {
+    "id": "22220",
+    "subjectCode": "UQ25CA641BB1",
+    "subjectName": "UQ25CA641BB1-Scalable Data Processing"
+  },
+  {
+    "id": "22221",
+    "subjectCode": "UQ25CA641BC1",
+    "subjectName": "UQ25CA641BC1-Network Security"
+  },
+  {
+    "id": "22222",
+    "subjectCode": "UQ25CA641BD1",
+    "subjectName": "UQ25CA641BD1-Cloud Services"
+  },
+  {
+    "id": "22223",
+    "subjectCode": "UQ24CA721BA",
+    "subjectName": "UQ24CA721BA-Research Methodology"
+  },
+  {
+    "id": "22224",
+    "subjectCode": "UQ24CA721BB",
+    "subjectName": "UQ24CA721BB-Intellectual Property Rights"
+  },
+  {
+    "id": "22225",
+    "subjectCode": "UQ24CA721BC",
+    "subjectName": "UQ24CA721BC-Cloud Computing Essentials"
+  },
+  {
+    "id": "22226",
+    "subjectCode": "UQ24CA722BA",
+    "subjectName": "UQ24CA722BA-Agile Project Management"
+  },
+  {
+    "id": "22227",
+    "subjectCode": "UQ24CA722BB",
+    "subjectName": "UQ24CA722BB-Agentic AI"
+  },
+  {
+    "id": "22228",
+    "subjectCode": "UQ24CA722BC",
+    "subjectName": "UQ24CA722BC-Design Thinking"
+  },
+  {
+    "id": "22229",
+    "subjectCode": "UE25EC643BB2",
+    "subjectName": "UE25EC643BB2-Digital VLSI Testing and Testability"
+  },
+  {
+    "id": "22230",
+    "subjectCode": "UE25EC644BB1",
+    "subjectName": "UE25EC644BB1-System On Chip Architecture"
+  },
+  {
+    "id": "22231",
+    "subjectCode": "UE25EC645BB2",
+    "subjectName": "UE25EC645BB2-RF and Optical Amplifier Design"
+  },
+  {
+    "id": "22232",
+    "subjectCode": "UE25EC645BB3",
+    "subjectName": "UE25EC645BB3-Mapping Algorithm to Architecture"
+  },
+  {
+    "id": "22233",
+    "subjectCode": "UE25EC621B",
+    "subjectName": "UE25EC621B-Research Methodology"
+  },
+  {
+    "id": "22234",
+    "subjectCode": "UX25MB651A",
+    "subjectName": "UX25MB651A-Data Science Toolkit"
+  },
+  {
+    "id": "22235",
+    "subjectCode": "UX25MB641A",
+    "subjectName": "UX25MB641A-Marketing Management"
+  },
+  {
+    "id": "22236",
+    "subjectCode": "UX25MB652A",
+    "subjectName": "UX25MB652A-Statistical Methods for Decision Making"
+  },
+  {
+    "id": "22237",
+    "subjectCode": "UX25MB653A",
+    "subjectName": "UX25MB653A-Management Accounting"
+  },
+  {
+    "id": "22238",
+    "subjectCode": "UX25MB651B",
+    "subjectName": "UX25MB651B-Data Mining"
+  },
+  {
+    "id": "22239",
+    "subjectCode": "UX25MB641B",
+    "subjectName": "UX25MB641B-Organization Behaviour & HRM"
+  },
+  {
+    "id": "22240",
+    "subjectCode": "UX25MB652B",
+    "subjectName": "UX25MB652B-Operations Management"
+  },
+  {
+    "id": "22241",
+    "subjectCode": "UX25MB653B",
+    "subjectName": "UX25MB653B-Financial Management"
+  },
+  {
+    "id": "22242",
+    "subjectCode": "UX25MB741A",
+    "subjectName": "UX25MB741A-Managerial Economics"
+  },
+  {
+    "id": "22243",
+    "subjectCode": "UX25MB751A",
+    "subjectName": "UX25MB751A-Corporate Finance"
+  },
+  {
+    "id": "22244",
+    "subjectCode": "UX25MB742A",
+    "subjectName": "UX25MB742A-Service Operations Management"
+  },
+  {
+    "id": "22245",
+    "subjectCode": "UX25MB752A",
+    "subjectName": "UX25MB752A-Business Analytics"
+  },
+  {
+    "id": "22246",
+    "subjectCode": "UX25MB741B",
+    "subjectName": "UX25MB741B-Project Management"
+  },
+  {
+    "id": "22247",
+    "subjectCode": "UX25MB742B",
+    "subjectName": "UX25MB742B-Strategic Management"
+  },
+  {
+    "id": "22248",
+    "subjectCode": "UX25MB751B",
+    "subjectName": "UX25MB751B-Data Visualisation & Storytelling"
+  },
+  {
+    "id": "22249",
+    "subjectCode": "UX25MB752B",
+    "subjectName": "UX25MB752B-Digital Transformation"
+  },
+  {
+    "id": "22250",
+    "subjectCode": "UX25MB761B",
+    "subjectName": "UX25MB761B-Capstone Project 1"
+  },
+  {
+    "id": "22251",
+    "subjectCode": "UX25MB721C",
+    "subjectName": "UX25MB721C-Business Ethics and Corporate Governance"
+  },
+  {
+    "id": "22252",
+    "subjectCode": "UX25MB731C",
+    "subjectName": "UX25MB731C-AI Applications"
   }
 ]
