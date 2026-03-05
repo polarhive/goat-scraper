@@ -72066,8 +72066,8 @@
   },
   {
     "id": "19713",
-    "subjectCode": "Module",
-    "subjectName": "Module-1 and 2"
+    "subjectCode": "BESTModule1",
+    "subjectName": "BESTModule1-BESTModule - 1"
   },
   {
     "id": "19714",
@@ -75301,8 +75301,8 @@
   },
   {
     "id": "20360",
-    "subjectCode": "Module ",
-    "subjectName": "Module -3 and 4"
+    "subjectCode": "BESTModule2",
+    "subjectName": "BESTModule2-BESTModule - 2"
   },
   {
     "id": "20361",
@@ -84763,5 +84763,40 @@
     "id": "22252",
     "subjectCode": "UX25MB731C",
     "subjectName": "UX25MB731C-AI Applications"
+  },
+  {
+    "id": "22253",
+    "subjectCode": "UM25MB004",
+    "subjectName": "UM25MB004-Case Writing"
+  },
+  {
+    "id": "22254",
+    "subjectCode": "UM25MB623B",
+    "subjectName": "UM25MB623B-Term Paper"
+  },
+  {
+    "id": "22255",
+    "subjectCode": "UE25CS621B",
+    "subjectName": "UE25CS621B-Large Language Models"
+  },
+  {
+    "id": "22256",
+    "subjectCode": "UM25MB005",
+    "subjectName": "UM25MB005-Placements Readiness"
+  },
+  {
+    "id": "22257",
+    "subjectCode": "BESTModule3",
+    "subjectName": "BESTModule3-BESTModule - 3"
+  },
+  {
+    "id": "22258",
+    "subjectCode": "BESTModule4",
+    "subjectName": "BESTModule4-BESTModule - 4"
+  },
+  {
+    "id": "22259",
+    "subjectCode": "UM25MB001B",
+    "subjectName": "UM25MB001B-Python Proficiency Test"
   }
 ]

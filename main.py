@@ -1686,19 +1686,28 @@ def merge_pdfs(pdf_files: List[Path], output_path: Path) -> bool:
         merger = PdfWriter()
         pdf_count = 0
 
-        for pdf_file in pdf_files:
-            # Only merge PDF files
-            if pdf_file.suffix.lower() != ".pdf":
-                logger.debug(f"Skipping non-PDF file: {pdf_file.name}")
-                continue
-
-            if pdf_file.exists() and pdf_file.stat().st_size > 0:
-                try:
-                    merger.append(str(pdf_file))
-                    pdf_count += 1
-                except Exception as e:
-                    logger.warning(f"Failed to add {pdf_file.name} to merged PDF: {e}")
+        # pypdf sometimes writes warnings directly to stderr (e.g. "Annotation sizes differ...").
+        # Those messages are harmless but clutter the console.  Redirect stderr around the
+        # append() calls so they are suppressed; we still log serious exceptions below.
+        import contextlib, io, os
+        devnull = open(os.devnull, "w")
+        try:
+            for pdf_file in pdf_files:
+                # Only merge PDF files
+                if pdf_file.suffix.lower() != ".pdf":
+                    logger.debug(f"Skipping non-PDF file: {pdf_file.name}")
                     continue
+
+                if pdf_file.exists() and pdf_file.stat().st_size > 0:
+                    try:
+                        with contextlib.redirect_stderr(devnull):
+                            merger.append(str(pdf_file))
+                        pdf_count += 1
+                    except Exception as e:
+                        logger.warning(f"Failed to add {pdf_file.name} to merged PDF: {e}")
+                        continue
+        finally:
+            devnull.close()
 
         if len(merger.pages) == 0:
             logger.warning(
@@ -1787,13 +1796,20 @@ def generate_esa_pdf(
         )
 
         merger = PdfWriter()
-        for unit_num, pdf_path in merged_pdfs:
-            if pdf_path.exists() and pdf_path.stat().st_size > 0:
-                try:
-                    merger.append(str(pdf_path))
-                except Exception as e:
-                    logger.warning(f"Failed to add unit {unit_num} to ESA PDF: {e}")
-                    continue
+        # silence pypdf annotation warnings here too
+        import contextlib, os
+        devnull = open(os.devnull, "w")
+        try:
+            for unit_num, pdf_path in merged_pdfs:
+                if pdf_path.exists() and pdf_path.stat().st_size > 0:
+                    try:
+                        with contextlib.redirect_stderr(devnull):
+                            merger.append(str(pdf_path))
+                    except Exception as e:
+                        logger.warning(f"Failed to add unit {unit_num} to ESA PDF: {e}")
+                        continue
+        finally:
+            devnull.close()
 
         if len(merger.pages) == 0:
             print(f"{Fore.RED}✗{Style.RESET_ALL}")
