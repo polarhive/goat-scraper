@@ -38351,8 +38351,8 @@
   },
   {
     "id": "12399",
-    "subjectCode": "065",
-    "subjectName": "065-JEE EXAMINATION"
+    "subjectCode": "TAA065",
+    "subjectName": "TAA065-JEE EXAMINATION"
   },
   {
     "id": "12400",
@@ -80142,7 +80142,7 @@
   {
     "id": "21328",
     "subjectCode": "UE25CS644A",
-    "subjectName": "UE25CS644A-Stochastic models and Machine Learning"
+    "subjectName": "UE25CS644A-Stochastic Models and Machine Learning"
   },
   {
     "id": "21329",
@@ -81016,18 +81016,18 @@
   },
   {
     "id": "21503",
-    "subjectCode": "UD25FD62fiA",
-    "subjectName": "UD25FD62fiA-Introduction & History of Design"
+    "subjectCode": "UD25FD621A ",
+    "subjectName": "UD25FD621A -Introduction & History of Design"
   },
   {
     "id": "21504",
-    "subjectCode": "UD25FD66fiA",
-    "subjectName": "UD25FD66fiA-Visual Design Basics"
+    "subjectCode": "UD25FD661A",
+    "subjectName": "UD25FD661A-Visual Design Basics"
   },
   {
     "id": "21505",
-    "subjectCode": "UD25FD63fiB",
-    "subjectName": "UD25FD63fiB-Design Semantics, Cognition & Aesthetics"
+    "subjectCode": "UD25FD631A",
+    "subjectName": "UD25FD631A-Design Semantics, Cognition & Aesthetics"
   },
   {
     "id": "21506",
@@ -81041,28 +81041,28 @@
   },
   {
     "id": "21508",
-    "subjectCode": "UD25FD64fiA",
-    "subjectName": "UD25FD64fiA-Design Innovation & Concepts"
+    "subjectCode": "UD25FD641A",
+    "subjectName": "UD25FD641A-Design Innovation & Concepts"
   },
   {
     "id": "21509",
-    "subjectCode": "UD25FD621A",
-    "subjectName": "UD25FD621A-Introduction & History of Design"
+    "subjectCode": "Testing",
+    "subjectName": "Testing-Testing"
   },
   {
     "id": "21510",
-    "subjectCode": "UD25FD661A",
-    "subjectName": "UD25FD661A-Visual Design Basics"
+    "subjectCode": "UD25ddddFD661A",
+    "subjectName": "UD25ddddFD661A-Test"
   },
   {
     "id": "21511",
-    "subjectCode": "UD25FD631B",
-    "subjectName": "UD25FD631B-Design Semantics, Cognition & Aesthetics"
+    "subjectCode": "UD25FggggD631B",
+    "subjectName": "UD25FggggD631B-Test"
   },
   {
     "id": "21512",
-    "subjectCode": "UD25FD641A",
-    "subjectName": "UD25FD641A-Design Innovation & Concepts"
+    "subjectCode": "Test",
+    "subjectName": "Test-Test"
   },
   {
     "id": "21513",
@@ -83836,13 +83836,13 @@
   },
   {
     "id": "22067",
-    "subjectCode": "UH25MB101T",
-    "subjectName": "UH25MB101T-Anatomy - Theory"
+    "subjectCode": "UH25MB101T.",
+    "subjectName": "UH25MB101T.-Anatomy - Theory"
   },
   {
     "id": "22068",
-    "subjectCode": "UH24MB202T",
-    "subjectName": "UH24MB202T-Pathology - Theory"
+    "subjectCode": "UH24MB202T.",
+    "subjectName": "UH24MB202T.-Pathology - Theory"
   },
   {
     "id": "22069",
@@ -84798,5 +84798,240 @@
     "id": "22259",
     "subjectCode": "UM25MB001B",
     "subjectName": "UM25MB001B-Python Proficiency Test"
+  },
+  {
+    "id": "22260",
+    "subjectCode": "EPHM008",
+    "subjectName": "EPHM008-ARCHITECTURE"
+  },
+  {
+    "id": "22261",
+    "subjectCode": "EPHM022",
+    "subjectName": "EPHM022-PERFORMING ARTS"
+  },
+  {
+    "id": "22262",
+    "subjectCode": "UE26ASIT001",
+    "subjectName": "UE26ASIT001-PIL-AKAMAI SUMMER INTERNSHIP"
+  },
+  {
+    "id": "22263",
+    "subjectCode": "UE23AM343BB2(A)",
+    "subjectName": "UE23AM343BB2(A)-Large language Models and Their Applications (A)"
+  },
+  {
+    "id": "22264",
+    "subjectCode": "DES1017*",
+    "subjectName": "DES1017*-Manipulation & Restructuring Project"
+  },
+  {
+    "id": "22265",
+    "subjectCode": "DES1018*",
+    "subjectName": "DES1018*-Ideation Case Study"
+  },
+  {
+    "id": "22266",
+    "subjectCode": "DES1128*",
+    "subjectName": "DES1128*-Design History"
+  },
+  {
+    "id": "22267",
+    "subjectCode": "DES1129*",
+    "subjectName": "DES1129*-Design Appreciation"
+  },
+  {
+    "id": "22268",
+    "subjectCode": "DES1131*",
+    "subjectName": "DES1131*-Digital tools for Designer"
+  },
+  {
+    "id": "22269",
+    "subjectCode": "DES2082*",
+    "subjectName": "DES2082*-Drawing for Designers"
+  },
+  {
+    "id": "22270",
+    "subjectCode": "ENG2001*",
+    "subjectName": "ENG2001*-Advanced English"
+  },
+  {
+    "id": "22271",
+    "subjectCode": "KAN1001*",
+    "subjectName": "KAN1001*-Kali Kannada"
+  },
+  {
+    "id": "22272",
+    "subjectCode": "PPS1012*",
+    "subjectName": "PPS1012*-Enhancing Personality through Soft Skills"
+  },
+  {
+    "id": "22273",
+    "subjectCode": "DES1007*",
+    "subjectName": "DES1007*-Elements & Principles of Design"
+  },
+  {
+    "id": "22274",
+    "subjectCode": "DES1008*",
+    "subjectName": "DES1008*-Materials, Media, tools & Techniques"
+  },
+  {
+    "id": "22275",
+    "subjectCode": "DES1010*",
+    "subjectName": "DES1010*-Observation & Ideation"
+  },
+  {
+    "id": "22276",
+    "subjectCode": "DES1015*",
+    "subjectName": "DES1015*-Basics of Drawing Skills"
+  },
+  {
+    "id": "22277",
+    "subjectCode": "DES1016*",
+    "subjectName": "DES1016*-Observational Case Study"
+  },
+  {
+    "id": "22278",
+    "subjectCode": "DES1127*",
+    "subjectName": "DES1127*-Innovation Project for Designer"
+  },
+  {
+    "id": "22279",
+    "subjectCode": "DES2088*",
+    "subjectName": "DES2088*-Concept Development"
+  },
+  {
+    "id": "22280",
+    "subjectCode": "ENG1002*",
+    "subjectName": "ENG1002*-Technical English"
+  },
+  {
+    "id": "22281",
+    "subjectCode": "PPS1001*",
+    "subjectName": "PPS1001*-Introduction to Soft Skills"
+  },
+  {
+    "id": "22282",
+    "subjectCode": "UH24AH201",
+    "subjectName": "UH24AH201-Sociology"
+  },
+  {
+    "id": "22283",
+    "subjectCode": "UH24AH202",
+    "subjectName": "UH24AH202-Environmental Science"
+  },
+  {
+    "id": "22284",
+    "subjectCode": "UH24AH203",
+    "subjectName": "UH24AH203-Constitution of India"
+  },
+  {
+    "id": "22285",
+    "subjectCode": "UE24EC722BB1",
+    "subjectName": "UE24EC722BB1-VLSI for DSP"
+  },
+  {
+    "id": "22286",
+    "subjectCode": "UD26FD621B",
+    "subjectName": "UD26FD621B-Introduction to Strategic Design Management"
+  },
+  {
+    "id": "22287",
+    "subjectCode": "UD26FD631B",
+    "subjectName": "UD26FD631B-Design Thinking as a Method"
+  },
+  {
+    "id": "22288",
+    "subjectCode": "UD26FD632B",
+    "subjectName": "UD26FD632B-Service Design: Theory & Practices"
+  },
+  {
+    "id": "22289",
+    "subjectCode": "UD26FD622B",
+    "subjectName": "UD26FD622B-Design Management & Innovation"
+  },
+  {
+    "id": "22290",
+    "subjectCode": "UD26FD633B",
+    "subjectName": "UD26FD633B-Design Concepts and Concerns: Design for the real world"
+  },
+  {
+    "id": "22291",
+    "subjectCode": "UD26FD634B",
+    "subjectName": "UD26FD634B-Organizational Learning"
+  },
+  {
+    "id": "22292",
+    "subjectCode": "UD26FD635B",
+    "subjectName": "UD26FD635B-Gamification and Business Innovation"
+  },
+  {
+    "id": "22293",
+    "subjectCode": "UD26FD636B",
+    "subjectName": "UD26FD636B-Business Communication & Strategic Branding"
+  },
+  {
+    "id": "22294",
+    "subjectCode": "UD26FD641B",
+    "subjectName": "UD26FD641B-Mini Project I"
+  },
+  {
+    "id": "22295",
+    "subjectCode": "UE23CS342BA4(A)",
+    "subjectName": "UE23CS342BA4(A)-Generative AI and its Applications (A)"
+  },
+  {
+    "id": "22296",
+    "subjectCode": "CSPPT",
+    "subjectName": "CSPPT-PESU PPT CS"
+  },
+  {
+    "id": "22297",
+    "subjectCode": "UN25NS121B",
+    "subjectName": "UN25NS121B-Applied Biochemistry"
+  },
+  {
+    "id": "22298",
+    "subjectCode": "UN25NS131B",
+    "subjectName": "UN25NS131B-Applied Nutrition and Dietetics"
+  },
+  {
+    "id": "22299",
+    "subjectCode": "UN25NS161B",
+    "subjectName": "UN25NS161B-Nursing Foundation II including Health Assessment module \\t \\t \\t \\t"
+  },
+  {
+    "id": "22300",
+    "subjectCode": "UN25NS132B",
+    "subjectName": "UN25NS132B-Health / Nursing Informatics & Technology\\t \\t \\t"
+  },
+  {
+    "id": "22301",
+    "subjectCode": "UN25NS1B1B",
+    "subjectName": "UN25NS1B1B-P-Nursing Foundation I & II including Health Assessment module \\t"
+  },
+  {
+    "id": "22302",
+    "subjectCode": "UN25NS1B1B",
+    "subjectName": "UN25NS1B1B-SL-Nursing Foundation I & II including Health Assessment module skill lab"
+  },
+  {
+    "id": "22303",
+    "subjectCode": "UM25BB041",
+    "subjectName": "UM25BB041-Case Image Testing"
+  },
+  {
+    "id": "22304",
+    "subjectCode": "TAA055",
+    "subjectName": "TAA055-Science Math"
+  },
+  {
+    "id": "22305",
+    "subjectCode": "UE22EE421B",
+    "subjectName": "UE22EE421B-Introduction to Machine Learning"
+  },
+  {
+    "id": "22306",
+    "subjectCode": "UE25MM101",
+    "subjectName": "UE25MM101-Mentor Mentee"
   }
 ]
