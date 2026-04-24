@@ -23,6 +23,7 @@ import re
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
+from curl_cffi import requests as curl_requests
 from bs4 import BeautifulSoup
 from pathlib import Path
 import hashlib
@@ -631,6 +632,9 @@ class PESUPDFFetcher:
         self.session.headers.update(
             {"Accept-Encoding": "gzip, deflate", "Connection": "keep-alive"}
         )
+
+        # Initialize curl_cffi session for complex downloads
+        self.curl_session = curl_requests.Session()
 
         self.username = username
         self.password = password
@@ -1271,19 +1275,38 @@ class PESUPDFFetcher:
                     # Download the selected file with proper headers (especially Referer)
                     logger.debug(f"Downloading from: {selected_link['full_url']}")
                     try:
-                        # Add Referer header - required for downloadslidecoursedoc URLs
+                        # Use curl_cffi for complex downloads that may involve redirects
+                        # Transfer cookies from requests session to curl_cffi session
+                        cookies_dict = self.session.cookies.get_dict()
+                        self.curl_session.cookies.update(cookies_dict)
+                        
+                        # Set headers similar to the curl command
                         headers = {
-                            "Referer": "https://www.pesuacademy.com/Academy/s/studentProfilePESU",
+                            "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:149.0) Gecko/20100101 Firefox/149.0",
                             "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                            "Accept-Language": "en-GB,en;q=0.9",
+                            "Accept-Encoding": "gzip, deflate, br, zstd",
+                            "Connection": "keep-alive",
+                            "Referer": "https://www.pesuacademy.com/Academy/s/studentProfilePESUAdmin?url=studentProfilePESUAdmin&controllerMode=6403&actionType=60&selectedData=" + course_id + "&id=2&unitid=" + class_id,
                         }
-                        file_response = self.session.get(
+                        
+                        file_response = self.curl_session.get(
                             selected_link["full_url"],
-                            stream=True,
                             headers=headers,
                             timeout=60,
+                            allow_redirects=True,
                         )
                         file_response.raise_for_status()
-                    except requests.RequestException as e:
+                        
+                        # Get the full content since curl_cffi doesn't support streaming
+                        file_content = file_response.content
+                        
+                        # Create an iterator from the content for compatibility
+                        def content_iterator():
+                            chunk_size = 8192
+                            for i in range(0, len(file_content), chunk_size):
+                                yield file_content[i:i + chunk_size]
+                    except Exception as e:
                         logger.error(f"Failed to download link {link_idx + 1}: {e}")
                         continue
 
@@ -1340,12 +1363,9 @@ class PESUPDFFetcher:
                     elif "application/octet-stream" in file_content_type:
                         # Generic binary - try to detect from magic bytes
                         # Read first few bytes to detect file type
-                        first_chunk = next(
-                            file_response.iter_content(chunk_size=8), b""
-                        )
+                        first_chunk = file_content[:8] if len(file_content) >= 8 else file_content
                         if first_chunk.startswith(b"PK"):
                             # ZIP-based format (pptx, docx, xlsx)
-                            # Need more context, default to pptx for presentations
                             extension = ".pptx"
                             logger.debug(
                                 "Detected ZIP-based format (likely Office document)"
@@ -1353,17 +1373,10 @@ class PESUPDFFetcher:
                         elif first_chunk.startswith(b"%PDF"):
                             extension = ".pdf"
 
-                        # Put the chunk back by creating a new iterator
-                        def iter_with_first_chunk():
-                            yield first_chunk
-                            yield from file_response.iter_content(chunk_size=8192)
+                    logger.debug(f"Detected file type: {extension}")
 
-                        content_iterator = iter_with_first_chunk()
-                    else:
-                        content_iterator = None
-
-                    if "content_iterator" not in locals() or content_iterator is None:
-                        content_iterator = file_response.iter_content(chunk_size=8192)
+                    # Create content iterator from the downloaded content
+                    content_iterator = content_iterator()
 
                     logger.debug(f"Detected file type: {extension}")
 
