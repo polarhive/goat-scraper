@@ -1855,6 +1855,58 @@ def generate_esa_pdf(
         return False
 
 
+def write_course_markdown(
+    summary: Dict[str, Any],
+    course_dir: Path,
+    course_prefix: str,
+    content_suffix: str = "",
+) -> None:
+    """Write a course-level markdown checklist file."""
+    markdown_path = course_dir / f"{course_prefix}{content_suffix}_checklist.md"
+    lines = [
+        f"# {summary.get('course_name', '')}",
+        "",
+        f"- **Course ID:** {summary.get('course_id', '')}",
+        f"- **Downloaded:** {summary.get('download_date', '')}",
+        f"- **Total units:** {summary.get('total_units', 0)}",
+        f"- **Total downloaded files:** {summary.get('total_downloaded', 0)}",
+        f"- **Total failed items:** {summary.get('total_failed', 0)}",
+        "",
+        "## Classes",
+        "",
+    ]
+
+    for unit in summary.get("units", []):
+        unit_number = unit.get("unit_number")
+        unit_name = unit.get("unit_name", "")
+
+        for cls in unit.get("classes", []):
+            status = cls.get("status", "failed")
+            checkbox = "[x]" if status == "success" else "[ ]"
+            class_name = cls.get("class_name", "Unknown class")
+            lines.append(f"- {checkbox} Unit {unit_number}: {class_name}")
+
+            seen_files = set()
+            files = cls.get("files", [])
+            for file_info in files:
+                if not isinstance(file_info, dict):
+                    continue
+                filename = file_info.get("filename", "")
+                if not filename or filename in seen_files:
+                    continue
+                seen_files.add(filename)
+                lines.append(f"  - {filename}")
+
+            if not seen_files:
+                lines.append("  - (no files downloaded)")
+
+    try:
+        with open(markdown_path, "w", encoding="utf-8") as f:
+            f.write("\n".join(lines).strip() + "\n")
+    except Exception as e:
+        logger.error(f"Failed to write markdown checklist: {e}")
+
+
 def batch_download_all(
     fetcher: PESUPDFFetcher,
     course_id: str,
@@ -1865,6 +1917,7 @@ def batch_download_all(
     skip_merge: bool = False,
     max_workers: Optional[int] = None,
     content_type_id: str = "2",
+    generate_markdown: bool = False,
 ) -> None:
     """
     Download all PDFs for units in a course automatically.
@@ -2439,6 +2492,11 @@ def batch_download_all(
     # Update the courses index.json for the frontend API
     update_courses_index(course_dir.parent)
 
+    if generate_markdown:
+        write_course_markdown(summary, course_dir, course_prefix, content_suffix)
+        checklist_path = course_dir / f"{course_prefix}{content_suffix}_checklist.md"
+        print(f"{Fore.CYAN}Checklist saved to:{Style.RESET_ALL} {checklist_path}")
+
     print(
         f"{Fore.GREEN}{Style.BRIGHT}Complete!{Style.RESET_ALL} Downloaded: {Fore.GREEN}{total_downloaded}{Style.RESET_ALL}, Failed: {Fore.RED}{total_failed}{Style.RESET_ALL}"
     )
@@ -2457,6 +2515,7 @@ def interactive_mode(
     skip_merge: bool = False,
     output_dir: Optional[str] = None,
     max_workers: Optional[int] = None,
+    generate_markdown: bool = False,
     content_type_id: str = "2",
 ) -> None:
     """Run the PDF fetcher in interactive mode with optional filters."""
@@ -2547,8 +2606,8 @@ def interactive_mode(
                             skip_merge,
                             max_workers=max_workers,
                             content_type_id=content_type_id,
+                            generate_markdown=generate_markdown,
                         )
-
                     return
 
                 except re.error as e:
@@ -2720,6 +2779,7 @@ def interactive_mode(
                 skip_merge,
                 max_workers=max_workers,
                 content_type_id=content_type_id,
+                generate_markdown=generate_markdown,
             )
             return
 
@@ -2968,6 +3028,12 @@ Examples:
         help="Override concurrency for parallel downloads (overrides PDF_FETCHER_MAX_WORKERS env var).",
     )
     parser.add_argument(
+        "-m",
+        "--markdown",
+        action="store_true",
+        help="Generate a markdown checklist file for each downloaded course.",
+    )
+    parser.add_argument(
         "--verbose",
         action="store_true",
         help="Enable verbose logging (DEBUG) for detailed per-file messages",
@@ -3097,6 +3163,7 @@ Examples:
                 args.no_merge,
                 args.output,
                 args.max_workers,
+                args.markdown,
                 content_type_id=content_type_id,
             )
         else:
@@ -3115,6 +3182,7 @@ Examples:
                         args.no_merge,
                         args.output,
                         args.max_workers,
+                        args.markdown,
                         content_type_id=content_type_id,
                     )
             else:
@@ -3128,6 +3196,7 @@ Examples:
                     args.no_merge,
                     args.output,
                     args.max_workers,
+                    args.markdown,
                     content_type_id=content_type_id,
                 )
 

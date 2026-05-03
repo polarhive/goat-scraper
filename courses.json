@@ -38466,8 +38466,8 @@
   },
   {
     "id": "12422",
-    "subjectCode": "066",
-    "subjectName": "066-NEET EXAMINATION"
+    "subjectCode": "TAA066",
+    "subjectName": "TAA066-NEET EXAMINATION"
   },
   {
     "id": "12423",
@@ -76902,7 +76902,7 @@
   {
     "id": "20680",
     "subjectCode": "UE24EE241B",
-    "subjectName": "UE24EE241B-Control systems"
+    "subjectName": "UE24EE241B-Control Systems"
   },
   {
     "id": "20681",
@@ -76962,7 +76962,7 @@
   {
     "id": "20692",
     "subjectCode": "UE22EC441B",
-    "subjectName": "UE22EC441B-Project Work-Phase-IV"
+    "subjectName": "UE22EC441B-Project Work Phase - IV"
   },
   {
     "id": "20693",
@@ -81337,7 +81337,7 @@
   {
     "id": "21567",
     "subjectCode": "UE24ME251B",
-    "subjectName": "UE24ME251B-Manufacturing Technology-2"
+    "subjectName": "UE24ME251B-Manufacturing Technology - II"
   },
   {
     "id": "21568",
@@ -81417,12 +81417,12 @@
   {
     "id": "21583",
     "subjectCode": "UM25BN141B",
-    "subjectName": "UM25BN141B-Data and Decisions-II"
+    "subjectName": "UM25BN141B-Data and Decisions - II"
   },
   {
     "id": "21584",
     "subjectCode": "UM25BN142B",
-    "subjectName": "UM25BN142B-Mathematics for Data Science-II"
+    "subjectName": "UM25BN142B-Mathematics for Data Science - II"
   },
   {
     "id": "21585",
@@ -81562,7 +81562,7 @@
   {
     "id": "21612",
     "subjectCode": "UE24BT252B",
-    "subjectName": "UE24BT252B-Biochemistry II"
+    "subjectName": "UE24BT252B-Biochemistry - II"
   },
   {
     "id": "21613",
@@ -81672,7 +81672,7 @@
   {
     "id": "21634",
     "subjectCode": "UE23CS342BA3",
-    "subjectName": "UE23CS342BA3-AI for sustainable development"
+    "subjectName": "UE23CS342BA3-AI for Sustainable Development"
   },
   {
     "id": "21635",
@@ -81687,7 +81687,7 @@
   {
     "id": "21637",
     "subjectCode": "UE23CS342BA6",
-    "subjectName": "UE23CS342BA6-Digital Forensics and Incident responses"
+    "subjectName": "UE23CS342BA6-Digital Forensics and Incident Responses"
   },
   {
     "id": "21638",
@@ -81732,7 +81732,7 @@
   {
     "id": "21646",
     "subjectCode": "UE24EE252B",
-    "subjectName": "UE24EE252B-Micro controllers"
+    "subjectName": "UE24EE252B-Micro Controllers"
   },
   {
     "id": "21647",
@@ -81796,8 +81796,8 @@
   },
   {
     "id": "21659",
-    "subjectCode": "UE22CS461XB",
-    "subjectName": "UE22CS461XB-Internship"
+    "subjectCode": "UE22CS461B",
+    "subjectName": "UE22CS461B-Internship"
   },
   {
     "id": "21660",
@@ -81827,17 +81827,17 @@
   {
     "id": "21665",
     "subjectCode": "UM25CM151B",
-    "subjectName": "UM25CM151B-Performance Management - I"
+    "subjectName": "UM25CM151B-Performance Management"
   },
   {
     "id": "21666",
     "subjectCode": "UM25CM141B",
-    "subjectName": "UM25CM141B-Corporate Reporting Practices - I"
+    "subjectName": "UM25CM141B-Corporate Reporting Practices"
   },
   {
     "id": "21667",
     "subjectCode": "UM25CM142B",
-    "subjectName": "UM25CM142B-Strategic Planning & Control - I"
+    "subjectName": "UM25CM142B-Strategic Planning & Control"
   },
   {
     "id": "21668",
@@ -81872,17 +81872,17 @@
   {
     "id": "21674",
     "subjectCode": "UM24CM251B",
-    "subjectName": "UM24CM251B-Performance Measurements - I"
+    "subjectName": "UM24CM251B-Performance Measurements"
   },
   {
     "id": "21675",
     "subjectCode": "UM24CM241B",
-    "subjectName": "UM24CM241B-Control & Security Measures - I"
+    "subjectName": "UM24CM241B-Control and Security Measures"
   },
   {
     "id": "21676",
     "subjectCode": "UM24CM252B",
-    "subjectName": "UM24CM252B-Technology & Analytics - I"
+    "subjectName": "UM24CM252B-Technology and  Analytics"
   },
   {
     "id": "21677",
@@ -81907,7 +81907,7 @@
   {
     "id": "21681",
     "subjectCode": "UM22AC432B",
-    "subjectName": "UM22AC432B-Organisational behaviour"
+    "subjectName": "UM22AC432B-Organisational Behaviour"
   },
   {
     "id": "21682",
@@ -81917,22 +81917,22 @@
   {
     "id": "21683",
     "subjectCode": "UM24BC241B",
-    "subjectName": "UM24BC241B-Goods and Service tax-I"
+    "subjectName": "UM24BC241B-Goods and Service Tax - I"
   },
   {
     "id": "21684",
     "subjectCode": "UM24BC251B",
-    "subjectName": "UM24BC251B-Direct Tax-II"
+    "subjectName": "UM24BC251B-Direct Tax - II"
   },
   {
     "id": "21685",
     "subjectCode": "UM24BC242B",
-    "subjectName": "UM24BC242B-Audit and Ethics -I"
+    "subjectName": "UM24BC242B-Audit and Ethics - I"
   },
   {
     "id": "21686",
     "subjectCode": "UM24BC252B",
-    "subjectName": "UM24BC252B-Advanced Accounting-II"
+    "subjectName": "UM24BC252B-Advanced Accounting - II"
   },
   {
     "id": "21687",
@@ -81957,7 +81957,7 @@
   {
     "id": "21691",
     "subjectCode": "UM25BC152B",
-    "subjectName": "UM25BC152B-Research methodology"
+    "subjectName": "UM25BC152B-Research Methodology"
   },
   {
     "id": "21692",
@@ -81977,7 +81977,7 @@
   {
     "id": "21695",
     "subjectCode": "UM23BC391B",
-    "subjectName": "UM23BC391B-Project"
+    "subjectName": "UM23BC391B-Project Work"
   },
   {
     "id": "21696",
@@ -81992,62 +81992,62 @@
   {
     "id": "21698",
     "subjectCode": "UM25BH141B",
-    "subjectName": "UM25BH141B-EVENT OPERATIONS"
+    "subjectName": "UM25BH141B-Event Operations"
   },
   {
     "id": "21699",
     "subjectCode": "UM25BH142B",
-    "subjectName": "UM25BH142B-F & B OPERATIONS"
+    "subjectName": "UM25BH142B-F & B Operations"
   },
   {
     "id": "21700",
     "subjectCode": "UM25BH143B",
-    "subjectName": "UM25BH143B-HOUSEKEEPING OPERATIONS"
+    "subjectName": "UM25BH143B-Housekeeping Operations"
   },
   {
     "id": "21701",
     "subjectCode": "UM25BH144B",
-    "subjectName": "UM25BH144B-FRONT OFFICE OPERATIONS"
+    "subjectName": "UM25BH144B-Front Office Operations"
   },
   {
     "id": "21702",
     "subjectCode": "UM25BH145B",
-    "subjectName": "UM25BH145B-PATISSERIE AND CONFECTIONERY"
+    "subjectName": "UM25BH145B-Patisserie And Confectionery"
   },
   {
     "id": "21703",
     "subjectCode": "UM25BH121B",
-    "subjectName": "UM25BH121B-DIGITAL TRENDS IN HOSPITALITY & EVENT INDUSTRY"
+    "subjectName": "UM25BH121B-Digital Trends In Hospitality & Event Industry"
   },
   {
     "id": "21704",
     "subjectCode": "UM24BH241B",
-    "subjectName": "UM24BH241B-DISTILLED BEVERAGES"
+    "subjectName": "UM24BH241B-Distilled Beverages"
   },
   {
     "id": "21705",
     "subjectCode": "UM24BH242B",
-    "subjectName": "UM24BH242B-REVENUE MANAGEMENT"
+    "subjectName": "UM24BH242B-Revenue Management"
   },
   {
     "id": "21706",
     "subjectCode": "UM24BH243B",
-    "subjectName": "UM24BH243B-EVENT MANAGEMENT"
+    "subjectName": "UM24BH243B-Event Management"
   },
   {
     "id": "21707",
     "subjectCode": "UM24BH244B",
-    "subjectName": "UM24BH244B-RESEARCH METHODOLOGY"
+    "subjectName": "UM24BH244B-Research Methodology"
   },
   {
     "id": "21708",
     "subjectCode": "UM24BH245B",
-    "subjectName": "UM24BH245B-REGIONAL CUISINE"
+    "subjectName": "UM24BH245B-Regional Cuisine"
   },
   {
     "id": "21709",
     "subjectCode": "UM24BH221B",
-    "subjectName": "UM24BH221B-NUTRITION & DIETETICS"
+    "subjectName": "UM24BH221B-Nutrition & Dietetics"
   },
   {
     "id": "21710",
@@ -82062,7 +82062,7 @@
   {
     "id": "21712",
     "subjectCode": "UR25PA141B",
-    "subjectName": "UR25PA141B-Performing Arts - Global context"
+    "subjectName": "UR25PA141B-Performing Arts - Global Context"
   },
   {
     "id": "21713",
@@ -82252,22 +82252,22 @@
   {
     "id": "21750",
     "subjectCode": "UL22BL441BA",
-    "subjectName": "UL22BL441BA-Criminal Psychology (Criminal Law)"
+    "subjectName": "UL22BL441BA-Criminal Psychology"
   },
   {
     "id": "21751",
     "subjectCode": "UL22BL442BA",
-    "subjectName": "UL22BL442BA-White Collar Crimes (Criminal Law)"
+    "subjectName": "UL22BL442BA-White Collar Crimes"
   },
   {
     "id": "21752",
     "subjectCode": "UL22BL441BB",
-    "subjectName": "UL22BL441BB-Investment Law (Corporate and Business Law)"
+    "subjectName": "UL22BL441BB-Investment Law"
   },
   {
     "id": "21753",
     "subjectCode": "UL22BL442BB",
-    "subjectName": "UL22BL442BB-Insurance Law (Corporate and Business Law)"
+    "subjectName": "UL22BL442BB-Insurance Law"
   },
   {
     "id": "21754",
@@ -82697,7 +82697,7 @@
   {
     "id": "21839",
     "subjectCode": "UB24PY741B",
-    "subjectName": "UB24PY741B-AppliedPsychology  in Marketing and Media"
+    "subjectName": "UB24PY741B-Applied Psychology in Marketing and Media"
   },
   {
     "id": "21840",
@@ -82707,7 +82707,7 @@
   {
     "id": "21841",
     "subjectCode": "UB24PY751B",
-    "subjectName": "UB24PY751B-Internship III"
+    "subjectName": "UB24PY751B-Internship - III"
   },
   {
     "id": "21842",
@@ -82967,7 +82967,7 @@
   {
     "id": "21893",
     "subjectCode": "UD24FD244FB",
-    "subjectName": "UD24FD244FB-Apparel Con struction-1"
+    "subjectName": "UD24FD244FB-Apparel Construction - I"
   },
   {
     "id": "21894",
@@ -83002,7 +83002,7 @@
   {
     "id": "21900",
     "subjectCode": "UD23FD321B",
-    "subjectName": "UD23FD321B-Program end Design Project - Phase 1"
+    "subjectName": "UD23FD321B-Program End Design Project Phase - I"
   },
   {
     "id": "21901",
@@ -83067,7 +83067,7 @@
   {
     "id": "21913",
     "subjectCode": "UD23FD331IB",
-    "subjectName": "UD23FD331IB-Design For Manufacturability and Cost"
+    "subjectName": "UD23FD331IB-Design for Manufacturability and Cost"
   },
   {
     "id": "21914",
@@ -83077,7 +83077,7 @@
   {
     "id": "21915",
     "subjectCode": "UD22FD442B",
-    "subjectName": "UD22FD442B-Program end Design Project - Phase 3"
+    "subjectName": "UD22FD442B-Program End Design Project Phase - III"
   },
   {
     "id": "21916",
@@ -83217,7 +83217,7 @@
   {
     "id": "21943",
     "subjectCode": "UB22PY442B",
-    "subjectName": "UB22PY442B-Core foundations and Contextual Application of Counselling"
+    "subjectName": "UB22PY442B-Core Foundations and Contextual Application of Counselling"
   },
   {
     "id": "21944",
@@ -83247,7 +83247,7 @@
   {
     "id": "21949",
     "subjectCode": "UE23EC342BB1",
-    "subjectName": "UE23EC342BB1-Quantum Transport and Logic gates"
+    "subjectName": "UE23EC342BB1-Quantum Transport and Logic Gates"
   },
   {
     "id": "21950",
@@ -83331,8 +83331,8 @@
   },
   {
     "id": "21966",
-    "subjectCode": "UL25CE121B",
-    "subjectName": "UL25CE121B-Constitutional Law, Cyber Law, IP Law and Professional Ethics"
+    "subjectCode": "UC25CE121B",
+    "subjectName": "UC25CE121B-Constitutional Law, Cyber Law, IP Law and Professional Ethics"
   },
   {
     "id": "21967",
@@ -83462,7 +83462,7 @@
   {
     "id": "21992",
     "subjectCode": "UE23EC343BB1",
-    "subjectName": "UE23EC343BB1-Non-linear Optics and Quantum technology"
+    "subjectName": "UE23EC343BB1-Non-linear Optics and Quantum Technology"
   },
   {
     "id": "21993",
@@ -83492,7 +83492,7 @@
   {
     "id": "21998",
     "subjectCode": "UM24BB244B",
-    "subjectName": "UM24BB244B-Production & operations Management"
+    "subjectName": "UM24BB244B-Production & Operations Management"
   },
   {
     "id": "21999",
@@ -83932,12 +83932,12 @@
   {
     "id": "22086",
     "subjectCode": "UM23BH351B",
-    "subjectName": "UM23BH351B-HOTEL INDUSTRY"
+    "subjectName": "UM23BH351B-Hotel Industry"
   },
   {
     "id": "22087",
     "subjectCode": "UM23BH352B",
-    "subjectName": "UM23BH352B-EVENT INDUSTRY"
+    "subjectName": "UM23BH352B-Event Industry"
   },
   {
     "id": "22088",
@@ -85033,5 +85033,370 @@
     "id": "22306",
     "subjectCode": "UE25MM101",
     "subjectName": "UE25MM101-Mentor Mentee"
+  },
+  {
+    "id": "22307",
+    "subjectCode": "UP24MP711B",
+    "subjectName": "UP24MP711B-Journal Club"
+  },
+  {
+    "id": "22308",
+    "subjectCode": "UP24MP7G1B",
+    "subjectName": "UP24MP7G1B-Research Work"
+  },
+  {
+    "id": "22309",
+    "subjectCode": "UP24MP731B",
+    "subjectName": "UP24MP731B-Discussion / Final Presentation"
+  },
+  {
+    "id": "22310",
+    "subjectCode": "UE22BT481B",
+    "subjectName": "UE22BT481B-Internship"
+  },
+  {
+    "id": "22311",
+    "subjectCode": "UX24MB251B",
+    "subjectName": "UX24MB251B-Corporate Taxation"
+  },
+  {
+    "id": "22312",
+    "subjectCode": "UX24MB252B",
+    "subjectName": "UX24MB252B-Business Analytics (Finance, Marketing & HR)"
+  },
+  {
+    "id": "22313",
+    "subjectCode": "UX24MB241B",
+    "subjectName": "UX24MB241B-Machine Learning"
+  },
+  {
+    "id": "22314",
+    "subjectCode": "UX24MB242B",
+    "subjectName": "UX24MB242B-Digital Marketing"
+  },
+  {
+    "id": "22315",
+    "subjectCode": "UX24MB221B",
+    "subjectName": "UX24MB221B-Panel Data"
+  },
+  {
+    "id": "22316",
+    "subjectCode": "UX24MB222B",
+    "subjectName": "UX24MB222B-Indian Economic Policy Analysis"
+  },
+  {
+    "id": "22317",
+    "subjectCode": "UX24MB223B",
+    "subjectName": "UX24MB223B-Term Paper"
+  },
+  {
+    "id": "22318",
+    "subjectCode": "UE24EC7A1B",
+    "subjectName": "UE24EC7A1B-Project Work Phase - II"
+  },
+  {
+    "id": "22319",
+    "subjectCode": "UE23ME321B",
+    "subjectName": "UE23ME321B-Capstone Project Phase - II"
+  },
+  {
+    "id": "22320",
+    "subjectCode": "UE22ME441B",
+    "subjectName": "UE22ME441B-Capstone Project Phase - IV"
+  },
+  {
+    "id": "22321",
+    "subjectCode": "UE22ME481B",
+    "subjectName": "UE22ME481B-Internship"
+  },
+  {
+    "id": "22322",
+    "subjectCode": "UE22ME461B",
+    "subjectName": "UE22ME461B-Internship"
+  },
+  {
+    "id": "22323",
+    "subjectCode": "UE22ME421B",
+    "subjectName": "UE22ME421B-Internship"
+  },
+  {
+    "id": "22324",
+    "subjectCode": "BESTModule5",
+    "subjectName": "BESTModule5-BESTModule - 5"
+  },
+  {
+    "id": "22325",
+    "subjectCode": "UM24MB771C",
+    "subjectName": "UM24MB771C-Internship - II"
+  },
+  {
+    "id": "22326",
+    "subjectCode": "UE22BT441B",
+    "subjectName": "UE22BT441B-Capstone Project Phase - IV"
+  },
+  {
+    "id": "22327",
+    "subjectCode": "UE23BT321B",
+    "subjectName": "UE23BT321B-Capstone Project Phase II"
+  },
+  {
+    "id": "22328",
+    "subjectCode": "UD22FD421B2",
+    "subjectName": "UD22FD421B2-Craft Documentation"
+  },
+  {
+    "id": "22329",
+    "subjectCode": "UD22FD421B1",
+    "subjectName": "UD22FD421B1-Summer Internship"
+  },
+  {
+    "id": "22330",
+    "subjectCode": "UE22AM441B",
+    "subjectName": "UE22AM441B-Capstone Project Phase - IV"
+  },
+  {
+    "id": "22331",
+    "subjectCode": "UQ23CA361B",
+    "subjectName": "UQ23CA361B-Internship"
+  },
+  {
+    "id": "22332",
+    "subjectCode": "UE22CS441B",
+    "subjectName": "UE22CS441B-Capstone Project Phase - IV"
+  },
+  {
+    "id": "22333",
+    "subjectCode": "UE22CS481B",
+    "subjectName": "UE22CS481B-Internship"
+  },
+  {
+    "id": "22334",
+    "subjectCode": "UE22CS422B",
+    "subjectName": "UE22CS422B-Internship"
+  },
+  {
+    "id": "22335",
+    "subjectCode": "UE23EE321B",
+    "subjectName": "UE23EE321B-Capstone Project Phase - II"
+  },
+  {
+    "id": "22336",
+    "subjectCode": "UE22EE441B",
+    "subjectName": "UE22EE441B-Capstone Project Phase - IV"
+  },
+  {
+    "id": "22337",
+    "subjectCode": "UE22EE481B",
+    "subjectName": "UE22EE481B-Internship"
+  },
+  {
+    "id": "22338",
+    "subjectCode": "UQ24CA781B",
+    "subjectName": "UQ24CA781B-Capstone Project Phase - II"
+  },
+  {
+    "id": "22339",
+    "subjectCode": "UQ24CA761B",
+    "subjectName": "UQ24CA761B-Internship"
+  },
+  {
+    "id": "22340",
+    "subjectCode": "UE22CS423B",
+    "subjectName": "UE22CS423B-Internship"
+  },
+  {
+    "id": "22341",
+    "subjectCode": "UE22CS424B",
+    "subjectName": "UE22CS424B-Internship"
+  },
+  {
+    "id": "22342",
+    "subjectCode": "UE22CS442B",
+    "subjectName": "UE22CS442B-Internship"
+  },
+  {
+    "id": "22343",
+    "subjectCode": "UE22CS443B",
+    "subjectName": "UE22CS443B-Internship"
+  },
+  {
+    "id": "22344",
+    "subjectCode": "UE22EC481B",
+    "subjectName": "UE22EC481B-Internship"
+  },
+  {
+    "id": "22345",
+    "subjectCode": "UE22EC421B",
+    "subjectName": "UE22EC421B-Internship"
+  },
+  {
+    "id": "22346",
+    "subjectCode": "UE22EC422B",
+    "subjectName": "UE22EC422B-Internship"
+  },
+  {
+    "id": "22347",
+    "subjectCode": "UE22AM481B",
+    "subjectName": "UE22AM481B-Internship"
+  },
+  {
+    "id": "22348",
+    "subjectCode": "UE22AM461B",
+    "subjectName": "UE22AM461B-Internship"
+  },
+  {
+    "id": "22349",
+    "subjectCode": "UE22AM421B",
+    "subjectName": "UE22AM421B-Internship"
+  },
+  {
+    "id": "22350",
+    "subjectCode": "UE22AM422B",
+    "subjectName": "UE22AM422B-Internship"
+  },
+  {
+    "id": "22351",
+    "subjectCode": "UE22EC442B",
+    "subjectName": "UE22EC442B-internship"
+  },
+  {
+    "id": "22352",
+    "subjectCode": "UE22EC443B",
+    "subjectName": "UE22EC443B-internship"
+  },
+  {
+    "id": "22353",
+    "subjectCode": "UE24CS252AS",
+    "subjectName": "UE24CS252AS-Data Structures and its Applications"
+  },
+  {
+    "id": "22354",
+    "subjectCode": "UM25BC221A",
+    "subjectName": "UM25BC221A-Social Internship"
+  },
+  {
+    "id": "22355",
+    "subjectCode": "UE23CS352AS",
+    "subjectName": "UE23CS352AS-Database Management System"
+  },
+  {
+    "id": "22356",
+    "subjectCode": "UE24CS242BS",
+    "subjectName": "UE24CS242BS-Operating Systems"
+  },
+  {
+    "id": "22357",
+    "subjectCode": "UE24CS241BS",
+    "subjectName": "UE24CS241BS-Design and Analysis of Algorithms"
+  },
+  {
+    "id": "22358",
+    "subjectCode": "UB24PY322A",
+    "subjectName": "UB24PY322A-Internship"
+  },
+  {
+    "id": "22359",
+    "subjectCode": "UE24CS141C",
+    "subjectName": "UE24CS141C-Engineering Mathematics"
+  },
+  {
+    "id": "22360",
+    "subjectCode": "UL25CE121B",
+    "subjectName": "UL25CE121B-Constitutional Law, Cyber Law, IP Law and Professional Ethics"
+  },
+  {
+    "id": "22361",
+    "subjectCode": "UB25PY222A",
+    "subjectName": "UB25PY222A-Community Based Internship"
+  },
+  {
+    "id": "22362",
+    "subjectCode": "UM24BB321A",
+    "subjectName": "UM24BB321A-Corporate internship"
+  },
+  {
+    "id": "22363",
+    "subjectCode": "UM24BC321A",
+    "subjectName": "UM24BC321A-Corporate Internship"
+  },
+  {
+    "id": "22364",
+    "subjectCode": "26PU101",
+    "subjectName": "26PU101-KANNADA"
+  },
+  {
+    "id": "22365",
+    "subjectCode": "26PU102",
+    "subjectName": "26PU102-ENGLISH"
+  },
+  {
+    "id": "22366",
+    "subjectCode": "26PU103",
+    "subjectName": "26PU103-HINDI"
+  },
+  {
+    "id": "22367",
+    "subjectCode": "26PU133",
+    "subjectName": "26PU133-PHYSICS"
+  },
+  {
+    "id": "22368",
+    "subjectCode": "26PU134",
+    "subjectName": "26PU134-CHEMISTRY"
+  },
+  {
+    "id": "22369",
+    "subjectCode": "26PU135",
+    "subjectName": "26PU135-MATHEMATICS"
+  },
+  {
+    "id": "22370",
+    "subjectCode": "26PU136",
+    "subjectName": "26PU136-BIOLOGY"
+  },
+  {
+    "id": "22371",
+    "subjectCode": "26PU141",
+    "subjectName": "26PU141-COMPUTER SCIENCE"
+  },
+  {
+    "id": "22372",
+    "subjectCode": "26PU105",
+    "subjectName": "26PU105-TELUGU"
+  },
+  {
+    "id": "22373",
+    "subjectCode": "26PU109",
+    "subjectName": "26PU109-SANSKRIT"
+  },
+  {
+    "id": "22374",
+    "subjectCode": "26PU122",
+    "subjectName": "26PU122-ECONOMICS"
+  },
+  {
+    "id": "22375",
+    "subjectCode": "26PU124",
+    "subjectName": "26PU124-GEOGRAPHY"
+  },
+  {
+    "id": "22376",
+    "subjectCode": "26PU127",
+    "subjectName": "26PU127-BUSINESS STUDIES"
+  },
+  {
+    "id": "22377",
+    "subjectCode": "26PU130",
+    "subjectName": "26PU130-ACCOUNTANCY"
+  },
+  {
+    "id": "22378",
+    "subjectCode": "26PU131",
+    "subjectName": "26PU131-STATISTICS"
+  },
+  {
+    "id": "22379",
+    "subjectCode": "26PU175",
+    "subjectName": "26PU175-BASIC MATHS"
   }
 ]
